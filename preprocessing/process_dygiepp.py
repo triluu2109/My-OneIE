@@ -23,7 +23,9 @@ def map_index(pieces):
 
 def convert(input_file, output_file, tokenizer, num_event_layers):
     # creates output file if it does not exists
-    output_folder = '/'.join(output_file.split('/')[0:-1])
+    _seperator = '/' if '/' in output_file else '\\'
+    output_folder = _seperator.join(output_file.split(_seperator)[0:-1])
+    print(output_folder)
     if not os.path.exists(output_folder):
         os.makedirs(output_folder)
 

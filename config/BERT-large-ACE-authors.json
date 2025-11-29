@@ -1,9 +1,9 @@
 {
     "bert_model_name": "bert-large-cased",
-    "bert_cache_dir": "<BERT_CACHE_DIR>",
+    "bert_cache_dir": "C:/path/to/bert_cache",
     "multi_piece_strategy": "average",
     "bert_dropout": 0.5,
-    "use_extra_bert": true,
+    "use_extra_bert": false,
     "extra_bert": -3,
   
     "use_global_features": true,
@@ -32,18 +32,18 @@
     "relation_directional": true,
     "symmetric_relations": ["PER-SOC"],
   
-    "train_file": "<TRAIN_FILE_PATH>",
-    "dev_file": "<DEV_FILE_PATH>",
-    "test_file": "<TEST_FILE_PATH>",
-    "log_path": "<OUTPUT_DIR>",
-    "valid_pattern_path": "<VALID_PATTERN_DIR>",
+    "train_file": "data/oneie/rams/train.oneie.json",
+    "dev_file": "data/oneie/rams/dev.oneie.json",
+    "test_file": "data/oneie/rams/test.oneie.json",
+    "log_path": "logs/rams_bert_large",
+    "valid_pattern_path": "resource/valid_patterns_rams",
     "ignore_title": true,
     "ignore_first_header": true,
   
     "accumulate_step": 1,
-    "batch_size": 10,
-    "eval_batch_size": 10,
-    "max_epoch": 100,
+    "batch_size": 4,
+    "eval_batch_size": 8,
+    "max_epoch": 60,
     "learning_rate": 1e-3,
     "bert_learning_rate": 1e-5,
     "weight_decay": 1e-3,
@@ -52,5 +52,6 @@
     "grad_clipping": 5.0,
   
     "use_gpu": true,
-    "gpu_device": 0
+    "gpu_device": 0,
+    "sent_max_length": 128
   }
