@@ -1,22 +1,24 @@
 {
     "bert_model_name": "bert-large-cased",
-    "bert_cache_dir": "C:/path/to/bert_cache",
+    "bert_cache_dir": "/cache",
     "multi_piece_strategy": "average",
     "bert_dropout": 0.5,
     "use_extra_bert": false,
     "extra_bert": -3,
-  
+
     "use_global_features": true,
-    "global_features":  ["role_role",
-                        "event_role_num",
-                        "role_entity",
-                        "multi_role",
-                        "relation_entity",
-                        "relation_role_role",
-                        "relation_relation",
-                        "multi_event"],
+    "global_features": [
+        "role_role",
+        "event_role_num",
+        "role_entity",
+        "multi_role",
+        "relation_entity",
+        "relation_role_role",
+        "relation_relation",
+        "multi_event"
+    ],
     "global_warmup": 0,
-  
+
     "linear_dropout": 0.4,
     "linear_bias": true,
     "entity_hidden_num": 150,
@@ -31,7 +33,7 @@
     "relation_mask_self": true,
     "relation_directional": true,
     "symmetric_relations": ["PER-SOC"],
-  
+
     "train_file": "data/oneie/rams/train.oneie.json",
     "dev_file": "data/oneie/rams/dev.oneie.json",
     "test_file": "data/oneie/rams/test.oneie.json",
@@ -39,7 +41,7 @@
     "valid_pattern_path": "resource/valid_patterns_rams",
     "ignore_title": true,
     "ignore_first_header": true,
-  
+
     "accumulate_step": 1,
     "batch_size": 4,
     "eval_batch_size": 8,
@@ -50,8 +52,8 @@
     "bert_weight_decay": 1e-5,
     "warmup_epoch": 5,
     "grad_clipping": 5.0,
-  
+
     "use_gpu": true,
     "gpu_device": 0,
     "sent_max_length": 128
-  }
+}

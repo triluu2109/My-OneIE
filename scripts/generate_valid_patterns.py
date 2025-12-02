@@ -13,8 +13,8 @@ import json
 from argparse import ArgumentParser
 sys.path.append('.')
 
-from config import Config
-from data import IEDataset
+from src.config import Config
+from src.data import IEDataset
 
 def generate_valid_patterns(dataset):
     """

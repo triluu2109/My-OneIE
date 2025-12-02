@@ -524,8 +524,10 @@ class OneIE(nn.Module):
             self.valid_role_entity = valid_patterns['role_entity']
         self.relation_directional = config.relation_directional
         self.symmetric_relations = config.symmetric_relations
-        self.symmetric_relation_idxs = {self.relation_type_stoi[r]
-                                        for r in self.symmetric_relations}
+        print(f'self.relation_type_stoi: {self.relation_type_stoi}')
+        # self.symmetric_relation_idxs = {self.relation_type_stoi[r]
+        #                                 for r in self.symmetric_relations}
+        self.symmetric_relation_idxs = {0}
 
         # BERT encoder
         bert_config = config.bert_config
@@ -1145,6 +1147,3 @@ class OneIE(nn.Module):
         graph.mentions = mention_list
 
         return graph
-
-
-
