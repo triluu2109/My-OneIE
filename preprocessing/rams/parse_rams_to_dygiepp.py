@@ -14,8 +14,11 @@ def read_jsonlines(path):
             data.append(obj)
     return data
 
-raw_data_path = Path(os.getcwd()).parent / "oneie/data/rams/raw/RAMS_1.0/data"
+raw_data_path = Path(os.getcwd()).parent / "oneie/data/RAMS/"
 processed_data_path = Path(os.getcwd()).parent / "oneie/data/rams/processed-data/json"
+
+if os.path.exists(processed_data_path) is False:
+    os.makedirs(processed_data_path)
 
 train_df = pd.DataFrame(read_jsonlines(raw_data_path / "train.jsonlines"))
 val_df = pd.DataFrame(read_jsonlines(raw_data_path / "dev.jsonlines"))
