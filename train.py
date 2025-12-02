@@ -170,8 +170,9 @@ for epoch in range(config.max_epoch):
     print('Epoch: {}'.format(epoch))
 
     # training set
-    progress = tqdm.tqdm(total=batch_num, ncols=75,
-                         desc='Train {}'.format(epoch))
+    # progress = tqdm.tqdm(total=batch_num, ncols=75,
+    #                      desc='Train {}'.format(epoch))
+    print(f'Train {epoch}')
     optimizer.zero_grad()
     for batch_idx, batch in enumerate(DataLoader(
             train_set, batch_size=config.batch_size // config.accumulate_step,
@@ -182,23 +183,24 @@ for epoch in range(config.max_epoch):
         loss.backward()
 
         if (batch_idx + 1) % config.accumulate_step == 0:
-            progress.update(1)
+            # progress.update(1)
             global_step += 1
             torch.nn.utils.clip_grad_norm_(
                 model.parameters(), config.grad_clipping)
             optimizer.step()
             schedule.step()
             optimizer.zero_grad()
-    progress.close()
+    # progress.close()
 
     # dev set
-    progress = tqdm.tqdm(total=dev_batch_num, ncols=75,
-                         desc='Dev {}'.format(epoch))
+    # progress = tqdm.tqdm(total=dev_batch_num, ncols=75,
+    #                      desc='Dev {}'.format(epoch))
+    print(f'Dev {epoch}')
     best_dev_role_model = False
     dev_gold_graphs, dev_pred_graphs, dev_sent_ids, dev_tokens = [], [], [], []
     for batch in DataLoader(dev_set, batch_size=config.eval_batch_size,
                             shuffle=False, collate_fn=dev_set.collate_fn):
-        progress.update(1)
+        # progress.update(1)
         graphs = model.predict(batch)
         if config.ignore_first_header:
             for inst_idx, sent_id in enumerate(batch.sent_ids):
@@ -211,7 +213,7 @@ for epoch in range(config.max_epoch):
         dev_pred_graphs.extend(graphs)
         dev_sent_ids.extend(batch.sent_ids)
         dev_tokens.extend(batch.tokens)
-    progress.close()
+    # progress.close()
     dev_scores = score_graphs(dev_gold_graphs, dev_pred_graphs,
                               relation_directional=config.relation_directional)
     for task in tasks:
@@ -227,12 +229,13 @@ for epoch in range(config.max_epoch):
                             dev_tokens)
 
     # test set
-    progress = tqdm.tqdm(total=test_batch_num, ncols=75,
-                         desc='Test {}'.format(epoch))
+    # progress = tqdm.tqdm(total=test_batch_num, ncols=75,
+    #                      desc='Test {}'.format(epoch))
+    print(f'Test {epoch}')
     test_gold_graphs, test_pred_graphs, test_sent_ids, test_tokens = [], [], [], []
     for batch in DataLoader(test_set, batch_size=config.eval_batch_size, shuffle=False,
                             collate_fn=test_set.collate_fn):
-        progress.update(1)
+        # progress.update(1)
         graphs = model.predict(batch)
         if config.ignore_first_header:
             for inst_idx, sent_id in enumerate(batch.sent_ids):
@@ -245,7 +248,7 @@ for epoch in range(config.max_epoch):
         test_pred_graphs.extend(graphs)
         test_sent_ids.extend(batch.sent_ids)
         test_tokens.extend(batch.tokens)
-    progress.close()
+    # progress.close()
     test_scores = score_graphs(test_gold_graphs, test_pred_graphs,
                                relation_directional=config.relation_directional)
     for task in tasks:
