@@ -1,788 +1,787 @@
 {
-  "artifactexistence:damagedestroy:n/a": [
-    "damagerdestroyer",
+  "artifactexistence.damagedestroy.damage": [
     "artifact",
-    "instrument",
-    "place"
-  ],
-  "artifactexistence:damagedestroy:damage": [
     "damager",
-    "artifact",
     "instrument",
     "place"
   ],
-  "artifactexistence:damagedestroy:destroy": [
+  "artifactexistence.damagedestroy.destroy": [
+    "artifact",
     "destroyer",
+    "instrument",
+    "place"
+  ],
+  "artifactexistence.damagedestroy.n/a": [
     "artifact",
+    "damagerdestroyer",
     "instrument",
     "place"
   ],
-  "conflict:attack:n/a": [
+  "conflict.attack.airstrikemissilestrike": [
     "attacker",
-    "target",
-    "instrument",
-    "place"
-  ],
-  "conflict:attack:airstrikemissilestrike": [
-    "attacker",
-    "target",
-    "instrument",
-    "place"
-  ],
-  "conflict:attack:biologicalchemicalpoisonattack": [
-    "attacker",
-    "target",
-    "instrument",
-    "place"
-  ],
-  "conflict:attack:bombing": [
-    "attacker",
-    "target",
-    "instrument",
-    "place"
-  ],
-  "conflict:attack:firearmattack": [
-    "attacker",
-    "target",
-    "instrument",
-    "place"
-  ],
-  "conflict:attack:hanging": [
-    "attacker",
-    "target",
-    "instrument",
-    "place"
-  ],
-  "conflict:attack:invade": [
-    "attacker",
-    "target",
-    "instrument",
-    "place"
-  ],
-  "conflict:attack:selfdirectedbattle": [
-    "attacker",
-    "target",
-    "instrument",
-    "place"
-  ],
-  "conflict:attack:setfire": [
-    "attacker",
-    "target",
-    "instrument",
-    "place"
-  ],
-  "conflict:attack:stabbing": [
-    "attacker",
-    "target",
-    "instrument",
-    "place"
-  ],
-  "conflict:attack:stealrobhijack": [
-    "attacker",
-    "target",
     "instrument",
     "place",
-    "artifact"
+    "target"
   ],
-  "conflict:attack:strangling": [
+  "conflict.attack.biologicalchemicalpoisonattack": [
     "attacker",
-    "target",
     "instrument",
-    "place"
+    "place",
+    "target"
   ],
-  "conflict:demonstrate:n/a": [
+  "conflict.attack.bombing": [
+    "attacker",
+    "instrument",
+    "place",
+    "target"
+  ],
+  "conflict.attack.firearmattack": [
+    "attacker",
+    "instrument",
+    "place",
+    "target"
+  ],
+  "conflict.attack.hanging": [
+    "attacker",
+    "instrument",
+    "place",
+    "target"
+  ],
+  "conflict.attack.invade": [
+    "attacker",
+    "instrument",
+    "place",
+    "target"
+  ],
+  "conflict.attack.n/a": [
+    "attacker",
+    "instrument",
+    "place",
+    "target"
+  ],
+  "conflict.attack.selfdirectedbattle": [
+    "attacker",
+    "instrument",
+    "place",
+    "target"
+  ],
+  "conflict.attack.setfire": [
+    "attacker",
+    "instrument",
+    "place",
+    "target"
+  ],
+  "conflict.attack.stabbing": [
+    "attacker",
+    "instrument",
+    "place",
+    "target"
+  ],
+  "conflict.attack.stealrobhijack": [
+    "artifact",
+    "attacker",
+    "instrument",
+    "place",
+    "target"
+  ],
+  "conflict.attack.strangling": [
+    "attacker",
+    "instrument",
+    "place",
+    "target"
+  ],
+  "conflict.demonstrate.marchprotestpoliticalgathering": [
     "demonstrator",
     "place"
   ],
-  "conflict:demonstrate:marchprotestpoliticalgathering": [
+  "conflict.demonstrate.n/a": [
     "demonstrator",
     "place"
   ],
-  "conflict:yield:n/a": [
-    "yielder",
+  "conflict.yield.n/a": [
+    "place",
     "recipient",
-    "place"
+    "yielder"
   ],
-  "conflict:yield:retreat": [
-    "retreater",
+  "conflict.yield.retreat": [
+    "destination",
     "origin",
-    "destination"
+    "retreater"
   ],
-  "conflict:yield:surrender": [
-    "surrenderer",
+  "conflict.yield.surrender": [
+    "place",
     "recipient",
-    "place"
+    "surrenderer"
   ],
-  "contact:collaborate:n/a": [
+  "contact.collaborate.correspondence": [
     "participant",
     "place"
   ],
-  "contact:collaborate:correspondence": [
+  "contact.collaborate.meet": [
     "participant",
     "place"
   ],
-  "contact:collaborate:meet": [
+  "contact.collaborate.n/a": [
     "participant",
     "place"
   ],
-  "contact:commandorder:n/a": [
+  "contact.commandorder.broadcast": [
     "communicator",
-    "recipient",
-    "place"
+    "place",
+    "recipient"
   ],
-  "contact:commandorder:broadcast": [
+  "contact.commandorder.correspondence": [
     "communicator",
-    "recipient",
-    "place"
+    "place",
+    "recipient"
   ],
-  "contact:commandorder:correspondence": [
+  "contact.commandorder.meet": [
     "communicator",
-    "recipient",
-    "place"
+    "place",
+    "recipient"
   ],
-  "contact:commandorder:meet": [
+  "contact.commandorder.n/a": [
     "communicator",
-    "recipient",
-    "place"
+    "place",
+    "recipient"
   ],
-  "contact:commitmentpromiseexpressintent:n/a": [
+  "contact.commitmentpromiseexpressintent.broadcast": [
     "communicator",
-    "recipient",
-    "place"
+    "place",
+    "recipient"
   ],
-  "contact:commitmentpromiseexpressintent:broadcast": [
+  "contact.commitmentpromiseexpressintent.correspondence": [
     "communicator",
-    "recipient",
-    "place"
+    "place",
+    "recipient"
   ],
-  "contact:commitmentpromiseexpressintent:correspondence": [
+  "contact.commitmentpromiseexpressintent.meet": [
     "communicator",
-    "recipient",
-    "place"
+    "place",
+    "recipient"
   ],
-  "contact:commitmentpromiseexpressintent:meet": [
+  "contact.commitmentpromiseexpressintent.n/a": [
     "communicator",
-    "recipient",
-    "place"
+    "place",
+    "recipient"
   ],
-  "contact:discussion:n/a": [
+  "contact.discussion.correspondence": [
     "participant",
     "place"
   ],
-  "contact:discussion:correspondence": [
+  "contact.discussion.meet": [
     "participant",
     "place"
   ],
-  "contact:discussion:meet": [
+  "contact.discussion.n/a": [
     "participant",
     "place"
   ],
-  "contact:funeralvigil:n/a": [
-    "participant",
+  "contact.funeralvigil.meet": [
     "deceased",
+    "participant",
     "place"
   ],
-  "contact:funeralvigil:meet": [
-    "participant",
+  "contact.funeralvigil.n/a": [
     "deceased",
-    "place"
-  ],
-  "contact:mediastatement:n/a": [
-    "communicator",
-    "recipient",
-    "place"
-  ],
-  "contact:mediastatement:broadcast": [
-    "communicator",
-    "recipient",
-    "place"
-  ],
-  "contact:negotiate:n/a": [
     "participant",
     "place"
   ],
-  "contact:negotiate:correspondence": [
+  "contact.mediastatement.broadcast": [
+    "communicator",
+    "place",
+    "recipient"
+  ],
+  "contact.mediastatement.n/a": [
+    "communicator",
+    "place",
+    "recipient"
+  ],
+  "contact.negotiate.correspondence": [
     "participant",
     "place"
   ],
-  "contact:negotiate:meet": [
+  "contact.negotiate.meet": [
     "participant",
     "place"
   ],
-  "contact:prevarication:n/a": [
-    "communicator",
-    "recipient",
+  "contact.negotiate.n/a": [
+    "participant",
     "place"
   ],
-  "contact:prevarication:broadcast": [
+  "contact.prevarication.broadcast": [
     "communicator",
-    "recipient",
-    "place"
+    "place",
+    "recipient"
   ],
-  "contact:prevarication:correspondence": [
+  "contact.prevarication.correspondence": [
     "communicator",
-    "recipient",
-    "place"
+    "place",
+    "recipient"
   ],
-  "contact:prevarication:meet": [
+  "contact.prevarication.meet": [
     "communicator",
-    "recipient",
-    "place"
+    "place",
+    "recipient"
   ],
-  "contact:publicstatementinperson:n/a": [
+  "contact.prevarication.n/a": [
     "communicator",
-    "recipient",
-    "place"
+    "place",
+    "recipient"
   ],
-  "contact:publicstatementinperson:broadcast": [
+  "contact.publicstatementinperson.broadcast": [
     "communicator",
-    "recipient",
-    "place"
+    "place",
+    "recipient"
   ],
-  "contact:requestadvise:n/a": [
+  "contact.publicstatementinperson.n/a": [
     "communicator",
-    "recipient",
-    "place"
+    "place",
+    "recipient"
   ],
-  "contact:requestadvise:broadcast": [
+  "contact.requestadvise.broadcast": [
     "communicator",
-    "recipient",
-    "place"
+    "place",
+    "recipient"
   ],
-  "contact:requestadvise:correspondence": [
+  "contact.requestadvise.correspondence": [
     "communicator",
-    "recipient",
-    "place"
+    "place",
+    "recipient"
   ],
-  "contact:requestadvise:meet": [
+  "contact.requestadvise.meet": [
     "communicator",
-    "recipient",
-    "place"
+    "place",
+    "recipient"
   ],
-  "contact:threatencoerce:n/a": [
+  "contact.requestadvise.n/a": [
     "communicator",
-    "recipient",
-    "place"
+    "place",
+    "recipient"
   ],
-  "contact:threatencoerce:broadcast": [
+  "contact.threatencoerce.broadcast": [
     "communicator",
-    "recipient",
-    "place"
+    "place",
+    "recipient"
   ],
-  "contact:threatencoerce:correspondence": [
+  "contact.threatencoerce.correspondence": [
     "communicator",
-    "recipient",
-    "place"
+    "place",
+    "recipient"
   ],
-  "contact:threatencoerce:meet": [
+  "contact.threatencoerce.meet": [
     "communicator",
-    "recipient",
-    "place"
+    "place",
+    "recipient"
   ],
-  "disaster:accidentcrash:accidentcrash": [
-    "driverpassenger",
-    "vehicle",
+  "contact.threatencoerce.n/a": [
+    "communicator",
+    "place",
+    "recipient"
+  ],
+  "disaster.accidentcrash.accidentcrash": [
     "crashobject",
-    "place"
+    "driverpassenger",
+    "place",
+    "vehicle"
   ],
-  "disaster:fireexplosion:fireexplosion": [
+  "disaster.fireexplosion.fireexplosion": [
     "fireexplosionobject",
     "instrument",
     "place"
   ],
-  "government:agreements:n/a": [
+  "government.agreements.acceptagreementcontractceasefire": [
     "participant",
     "place"
   ],
-  "government:agreements:acceptagreementcontractceasefire": [
+  "government.agreements.n/a": [
     "participant",
     "place"
   ],
-  "government:agreements:rejectnullifyagreementcontractceasefire": [
-    "rejecternullifier",
+  "government.agreements.rejectnullifyagreementcontractceasefire": [
     "otherparticipant",
-    "place"
+    "place",
+    "rejecternullifier"
   ],
-  "government:agreements:violateagreement": [
-    "violator",
+  "government.agreements.violateagreement": [
     "otherparticipant",
-    "place"
+    "place",
+    "violator"
   ],
-  "government:formation:n/a": [
-    "gpe",
-    "founder",
-    "place"
-  ],
-  "government:formation:mergegpe": [
+  "government.formation.mergegpe": [
     "participant",
     "place"
   ],
-  "government:formation:startgpe": [
-    "gpe",
+  "government.formation.n/a": [
     "founder",
+    "gpe",
     "place"
   ],
-  "government:legislate:legislate": [
+  "government.formation.startgpe": [
+    "founder",
+    "gpe",
+    "place"
+  ],
+  "government.legislate.legislate": [
     "governmentbody",
     "law",
     "place"
   ],
-  "government:spy:spy": [
-    "spy",
-    "observedentity",
+  "government.spy.spy": [
     "beneficiary",
-    "place"
-  ],
-  "government:vote:n/a": [
-    "voter",
-    "candidate",
-    "ballot",
-    "result",
-    "place"
-  ],
-  "government:vote:castvote": [
-    "voter",
-    "candidate",
-    "ballot",
-    "result",
-    "place"
-  ],
-  "government:vote:violationspreventvote": [
-    "preventer",
-    "voter",
-    "candidate",
-    "ballot",
-    "place"
-  ],
-  "inspection:sensoryobserve:n/a": [
-    "observer",
     "observedentity",
-    "place"
+    "place",
+    "spy"
   ],
-  "inspection:sensoryobserve:inspectpeopleorganization": [
-    "inspector",
+  "government.vote.castvote": [
+    "ballot",
+    "candidate",
+    "place",
+    "result",
+    "voter"
+  ],
+  "government.vote.n/a": [
+    "ballot",
+    "candidate",
+    "place",
+    "result",
+    "voter"
+  ],
+  "government.vote.violationspreventvote": [
+    "ballot",
+    "candidate",
+    "place",
+    "preventer",
+    "voter"
+  ],
+  "inspection.sensoryobserve.inspectpeopleorganization": [
     "inspectedentity",
+    "inspector",
     "place"
   ],
-  "inspection:sensoryobserve:monitorelection": [
+  "inspection.sensoryobserve.monitorelection": [
     "monitor",
     "monitoredentity",
     "place"
   ],
-  "inspection:sensoryobserve:physicalinvestigateinspect": [
-    "inspector",
+  "inspection.sensoryobserve.n/a": [
+    "observedentity",
+    "observer",
+    "place"
+  ],
+  "inspection.sensoryobserve.physicalinvestigateinspect": [
     "inspectedentity",
+    "inspector",
     "place"
   ],
-  "justice:arrestjaildetain:arrestjaildetain": [
-    "jailer",
+  "justice.arrestjaildetain.arrestjaildetain": [
+    "crime",
     "detainee",
-    "crime",
+    "jailer",
     "place"
   ],
-  "justice:initiatejudicialprocess:n/a": [
-    "prosecutor",
+  "justice.initiatejudicialprocess.chargeindict": [
+    "crime",
     "defendant",
     "judgecourt",
-    "crime",
-    "place"
+    "place",
+    "prosecutor"
   ],
-  "justice:initiatejudicialprocess:chargeindict": [
-    "prosecutor",
+  "justice.initiatejudicialprocess.n/a": [
+    "crime",
     "defendant",
     "judgecourt",
-    "crime",
-    "place"
+    "place",
+    "prosecutor"
   ],
-  "justice:initiatejudicialprocess:trialhearing": [
-    "prosecutor",
+  "justice.initiatejudicialprocess.trialhearing": [
+    "crime",
     "defendant",
     "judgecourt",
-    "crime",
-    "place"
+    "place",
+    "prosecutor"
   ],
-  "justice:investigate:n/a": [
+  "justice.investigate.investigatecrime": [
+    "crime",
+    "defendant",
     "investigator",
-    "defendant",
     "place"
   ],
-  "justice:investigate:investigatecrime": [
+  "justice.investigate.n/a": [
+    "defendant",
     "investigator",
-    "defendant",
-    "crime",
     "place"
   ],
-  "justice:judicialconsequences:n/a": [
+  "justice.judicialconsequences.convict": [
+    "crime",
+    "defendant",
     "judgecourt",
-    "defendant",
-    "crime",
     "place"
   ],
-  "justice:judicialconsequences:convict": [
-    "judgecourt",
-    "defendant",
+  "justice.judicialconsequences.execute": [
     "crime",
-    "place"
-  ],
-  "justice:judicialconsequences:execute": [
+    "defendant",
     "executioner",
-    "defendant",
-    "crime",
     "place"
   ],
-  "justice:judicialconsequences:extradite": [
+  "justice.judicialconsequences.extradite": [
+    "crime",
+    "defendant",
+    "destination",
     "extraditer",
-    "defendant",
+    "origin"
+  ],
+  "justice.judicialconsequences.n/a": [
     "crime",
-    "origin",
-    "destination"
-  ],
-  "life:die:n/a": [
-    "victim",
+    "defendant",
+    "judgecourt",
     "place"
   ],
-  "life:die:deathcausedbyviolentevents": [
-    "killer",
-    "victim",
+  "life.die.deathcausedbyviolentevents": [
     "instrument",
-    "place"
-  ],
-  "life:die:nonviolentdeath": [
-    "victim",
-    "place"
-  ],
-  "life:injure:n/a": [
-    "victim",
-    "injurer",
-    "place"
-  ],
-  "life:injure:illnessdegradationhungerthirst": [
-    "victim",
-    "place"
-  ],
-  "life:injure:illnessdegradationphysical": [
+    "killer",
+    "place",
     "victim"
   ],
-  "life:injure:injurycausedbyviolentevents": [
+  "life.die.n/a": [
+    "place",
+    "victim"
+  ],
+  "life.die.nonviolentdeath": [
+    "place",
+    "victim"
+  ],
+  "life.injure.illnessdegradationhungerthirst": [
+    "place",
+    "victim"
+  ],
+  "life.injure.illnessdegradationphysical": [
+    "victim"
+  ],
+  "life.injure.injurycausedbyviolentevents": [
     "injurer",
-    "victim",
     "instrument",
-    "place"
+    "place",
+    "victim"
   ],
-  "manufacture:artifact:n/a": [
+  "life.injure.n/a": [
+    "injurer",
+    "place",
+    "victim"
+  ],
+  "manufacture.artifact.build": [
+    "artifact",
+    "instrument",
     "manufacturer",
-    "artifact",
-    "instrument",
     "place"
   ],
-  "manufacture:artifact:build": [
+  "manufacture.artifact.createintellectualproperty": [
+    "artifact",
+    "instrument",
     "manufacturer",
-    "artifact",
-    "instrument",
     "place"
   ],
-  "manufacture:artifact:createintellectualproperty": [
+  "manufacture.artifact.createmanufacture": [
+    "artifact",
+    "instrument",
     "manufacturer",
-    "artifact",
-    "instrument",
     "place"
   ],
-  "manufacture:artifact:createmanufacture": [
+  "manufacture.artifact.n/a": [
+    "artifact",
+    "instrument",
     "manufacturer",
-    "artifact",
-    "instrument",
     "place"
   ],
-  "movement:transportartifact:n/a": [
-    "transporter",
+  "movement.transportartifact.bringcarryunload": [
     "artifact",
-    "vehicle",
+    "destination",
     "origin",
-    "destination"
-  ],
-  "movement:transportartifact:bringcarryunload": [
     "transporter",
-    "artifact",
-    "vehicle",
-    "origin",
-    "destination"
+    "vehicle"
   ],
-  "movement:transportartifact:disperseseparate": [
+  "movement.transportartifact.disperseseparate": [
+    "artifact",
+    "destination",
+    "origin",
     "transporter",
-    "artifact",
-    "vehicle",
-    "origin",
-    "destination"
+    "vehicle"
   ],
-  "movement:transportartifact:fall": [
+  "movement.transportartifact.fall": [
     "artifact",
-    "origin",
-    "destination"
-  ],
-  "movement:transportartifact:grantentry": [
-    "transporter",
-    "artifact",
-    "origin",
-    "destination"
-  ],
-  "movement:transportartifact:hide": [
-    "transporter",
-    "artifact",
-    "hidingplace",
-    "vehicle",
+    "destination",
     "origin"
   ],
-  "movement:transportartifact:nonviolentthrowlaunch": [
-    "transporter",
+  "movement.transportartifact.grantentry": [
     "artifact",
-    "vehicle",
+    "destination",
     "origin",
-    "destination"
+    "transporter"
   ],
-  "movement:transportartifact:prevententry": [
+  "movement.transportartifact.hide": [
+    "artifact",
+    "hidingplace",
+    "origin",
+    "transporter",
+    "vehicle"
+  ],
+  "movement.transportartifact.n/a": [
+    "artifact",
+    "destination",
+    "origin",
+    "transporter",
+    "vehicle"
+  ],
+  "movement.transportartifact.nonviolentthrowlaunch": [
+    "artifact",
+    "destination",
+    "origin",
+    "transporter",
+    "vehicle"
+  ],
+  "movement.transportartifact.prevententry": [
+    "artifact",
+    "destination",
+    "origin",
     "preventer",
-    "transporter",
-    "artifact",
-    "origin",
-    "destination"
+    "transporter"
   ],
-  "movement:transportartifact:preventexit": [
+  "movement.transportartifact.preventexit": [
+    "artifact",
+    "destination",
+    "origin",
     "preventer",
-    "transporter",
+    "transporter"
+  ],
+  "movement.transportartifact.receiveimport": [
     "artifact",
+    "destination",
     "origin",
-    "destination"
-  ],
-  "movement:transportartifact:receiveimport": [
     "transporter",
+    "vehicle"
+  ],
+  "movement.transportartifact.sendsupplyexport": [
     "artifact",
-    "vehicle",
+    "destination",
     "origin",
-    "destination"
-  ],
-  "movement:transportartifact:sendsupplyexport": [
     "transporter",
+    "vehicle"
+  ],
+  "movement.transportartifact.smuggleextract": [
     "artifact",
-    "vehicle",
+    "destination",
     "origin",
-    "destination"
-  ],
-  "movement:transportartifact:smuggleextract": [
     "transporter",
-    "artifact",
-    "vehicle",
-    "origin",
-    "destination"
+    "vehicle"
   ],
-  "movement:transportperson:n/a": [
+  "movement.transportperson.bringcarryunload": [
+    "destination",
+    "origin",
+    "passenger",
     "transporter",
-    "passenger",
-    "vehicle",
-    "origin",
-    "destination"
+    "vehicle"
   ],
-  "movement:transportperson:bringcarryunload": [
+  "movement.transportperson.disperseseparate": [
+    "destination",
+    "origin",
+    "passenger",
     "transporter",
-    "passenger",
-    "vehicle",
-    "origin",
-    "destination"
+    "vehicle"
   ],
-  "movement:transportperson:disperseseparate": [
+  "movement.transportperson.evacuationrescue": [
+    "destination",
+    "origin",
+    "passenger",
     "transporter",
-    "passenger",
-    "vehicle",
-    "origin",
-    "destination"
+    "vehicle"
   ],
-  "movement:transportperson:evacuationrescue": [
-    "transporter",
-    "passenger",
-    "vehicle",
+  "movement.transportperson.fall": [
+    "destination",
     "origin",
-    "destination"
+    "passenger"
   ],
-  "movement:transportperson:fall": [
-    "passenger",
-    "origin",
-    "destination"
-  ],
-  "movement:transportperson:grantentryasylum": [
+  "movement.transportperson.grantentryasylum": [
+    "destination",
     "granter",
-    "transporter",
-    "passenger",
     "origin",
-    "destination"
-  ],
-  "movement:transportperson:hide": [
-    "transporter",
     "passenger",
+    "transporter"
+  ],
+  "movement.transportperson.hide": [
     "hidingplace",
-    "vehicle",
-    "origin"
+    "origin",
+    "passenger",
+    "transporter",
+    "vehicle"
   ],
-  "movement:transportperson:prevententry": [
+  "movement.transportperson.n/a": [
+    "destination",
+    "origin",
+    "passenger",
+    "transporter",
+    "vehicle"
+  ],
+  "movement.transportperson.prevententry": [
+    "destination",
+    "origin",
+    "passenger",
     "preventer",
-    "transporter",
-    "passenger",
-    "origin",
-    "destination"
+    "transporter"
   ],
-  "movement:transportperson:preventexit": [
+  "movement.transportperson.preventexit": [
+    "destination",
+    "origin",
+    "passenger",
     "preventer",
-    "transporter",
+    "transporter"
+  ],
+  "movement.transportperson.selfmotion": [
+    "destination",
+    "origin",
+    "transporter"
+  ],
+  "movement.transportperson.smuggleextract": [
+    "destination",
+    "origin",
     "passenger",
-    "origin",
-    "destination"
-  ],
-  "movement:transportperson:selfmotion": [
     "transporter",
-    "vehicle",
-    "origin",
-    "destination"
+    "vehicle"
   ],
-  "movement:transportperson:smuggleextract": [
-    "transporter",
-    "passenger",
-    "vehicle",
-    "origin",
-    "destination"
-  ],
-  "personnel:elect:n/a": [
-    "voter",
+  "personnel.elect.n/a": [
     "candidate",
-    "place"
+    "place",
+    "voter"
   ],
-  "personnel:elect:winelection": [
-    "voter",
+  "personnel.elect.winelection": [
     "candidate",
-    "place"
+    "place",
+    "voter"
   ],
-  "personnel:endposition:n/a": [
+  "personnel.endposition.firinglayoff": [
     "employee",
-    "placeofemployment",
-    "place"
+    "place",
+    "placeofemployment"
   ],
-  "personnel:endposition:firinglayoff": [
+  "personnel.endposition.n/a": [
     "employee",
-    "placeofemployment",
-    "place"
+    "place",
+    "placeofemployment"
   ],
-  "personnel:endposition:quitretire": [
+  "personnel.endposition.quitretire": [
     "employee",
-    "placeofemployment",
-    "place"
+    "place",
+    "placeofemployment"
   ],
-  "personnel:startposition:n/a": [
+  "personnel.startposition.hiring": [
     "employee",
-    "placeofemployment",
-    "place"
+    "place",
+    "placeofemployment"
   ],
-  "personnel:startposition:hiring": [
+  "personnel.startposition.n/a": [
     "employee",
-    "placeofemployment",
-    "place"
+    "place",
+    "placeofemployment"
   ],
-  "transaction:transaction:n/a": [
-    "participant",
-    "beneficiary",
-    "place"
-  ],
-  "transaction:transaction:embargosanction": [
-    "preventer",
-    "giver",
-    "recipient",
+  "transaction.transaction.embargosanction": [
     "artifactmoney",
-    "place"
-  ],
-  "transaction:transaction:giftgrantprovideaid": [
     "giver",
-    "recipient",
-    "beneficiary",
-    "place"
-  ],
-  "transaction:transfermoney:n/a": [
-    "giver",
-    "recipient",
-    "beneficiary",
-    "money",
-    "place"
-  ],
-  "transaction:transfermoney:borrowlend": [
-    "giver",
-    "recipient",
-    "beneficiary",
-    "money",
-    "place"
-  ],
-  "transaction:transfermoney:embargosanction": [
+    "place",
     "preventer",
+    "recipient"
+  ],
+  "transaction.transaction.giftgrantprovideaid": [
+    "beneficiary",
     "giver",
+    "place",
+    "recipient"
+  ],
+  "transaction.transaction.n/a": [
+    "beneficiary",
+    "participant",
+    "place"
+  ],
+  "transaction.transaction.transfercontrol": [
+    "beneficiary",
+    "giver",
+    "place",
     "recipient",
+    "territoryorfacility"
+  ],
+  "transaction.transfermoney.borrowlend": [
+    "beneficiary",
+    "giver",
     "money",
-    "place"
+    "place",
+    "recipient"
   ],
-  "transaction:transfermoney:giftgrantprovideaid": [
+  "transaction.transfermoney.embargosanction": [
     "giver",
-    "recipient",
-    "beneficiary",
     "money",
-    "place"
-  ],
-  "transaction:transfermoney:payforservice": [
-    "giver",
-    "recipient",
-    "beneficiary",
-    "money",
-    "place"
-  ],
-  "transaction:transfermoney:purchase": [
-    "giver",
-    "recipient",
-    "beneficiary",
-    "money",
-    "place"
-  ],
-  "transaction:transferownership:n/a": [
-    "giver",
-    "recipient",
-    "beneficiary",
-    "artifact",
-    "place"
-  ],
-  "transaction:transferownership:borrowlend": [
-    "giver",
-    "recipient",
-    "beneficiary",
-    "artifact",
-    "place"
-  ],
-  "transaction:transferownership:embargosanction": [
+    "place",
     "preventer",
-    "giver",
-    "recipient",
-    "artifact",
-    "place"
+    "recipient"
   ],
-  "transaction:transferownership:giftgrantprovideaid": [
-    "giver",
-    "recipient",
+  "transaction.transfermoney.giftgrantprovideaid": [
     "beneficiary",
-    "artifact",
-    "place"
+    "giver",
+    "money",
+    "place",
+    "recipient"
   ],
-  "transaction:transferownership:purchase": [
-    "giver",
-    "recipient",
+  "transaction.transfermoney.n/a": [
     "beneficiary",
-    "artifact",
-    "place"
+    "giver",
+    "money",
+    "place",
+    "recipient"
   ],
-  "transaction:transaction:transfercontrol": [
-    "giver",
-    "recipient",
+  "transaction.transfermoney.payforservice": [
     "beneficiary",
-    "territoryorfacility",
-    "place"
+    "giver",
+    "money",
+    "place",
+    "recipient"
+  ],
+  "transaction.transfermoney.purchase": [
+    "beneficiary",
+    "giver",
+    "money",
+    "place",
+    "recipient"
+  ],
+  "transaction.transferownership.borrowlend": [
+    "artifact",
+    "beneficiary",
+    "giver",
+    "place",
+    "recipient"
+  ],
+  "transaction.transferownership.embargosanction": [
+    "artifact",
+    "giver",
+    "place",
+    "preventer",
+    "recipient"
+  ],
+  "transaction.transferownership.giftgrantprovideaid": [
+    "artifact",
+    "beneficiary",
+    "giver",
+    "place",
+    "recipient"
+  ],
+  "transaction.transferownership.n/a": [
+    "artifact",
+    "beneficiary",
+    "giver",
+    "place",
+    "recipient"
+  ],
+  "transaction.transferownership.purchase": [
+    "artifact",
+    "beneficiary",
+    "giver",
+    "place",
+    "recipient"
   ]
 }
