@@ -1,197 +1,197 @@
 {
-  "artifact": [
-    "Entity"
-  ],
-  "artifactmoney": [
-    "Entity"
-  ],
-  "attacker": [
-    "Entity"
-  ],
-  "ballot": [
-    "Entity"
-  ],
-  "beneficiary": [
-    "Entity"
-  ],
-  "candidate": [
-    "Entity"
-  ],
-  "communicator": [
-    "Entity"
-  ],
-  "crashobject": [
-    "Entity"
-  ],
-  "crime": [
-    "Entity"
-  ],
-  "damager": [
-    "Entity"
-  ],
-  "damagerdestroyer": [
-    "Entity"
-  ],
-  "deceased": [
-    "Entity"
-  ],
-  "defendant": [
-    "Entity"
-  ],
-  "demonstrator": [
-    "Entity"
-  ],
-  "destination": [
-    "Entity"
-  ],
-  "destroyer": [
-    "Entity"
-  ],
-  "detainee": [
-    "Entity"
-  ],
-  "driverpassenger": [
-    "Entity"
-  ],
-  "employee": [
-    "Entity"
-  ],
-  "executioner": [
-    "Entity"
-  ],
-  "extraditer": [
-    "Entity"
-  ],
-  "fireexplosionobject": [
-    "Entity"
-  ],
-  "founder": [
-    "Entity"
-  ],
-  "giver": [
-    "Entity"
-  ],
-  "governmentbody": [
-    "Entity"
-  ],
-  "gpe": [
-    "Entity"
-  ],
-  "granter": [
-    "Entity"
-  ],
-  "hidingplace": [
-    "Entity"
-  ],
   "injurer": [
-    "Entity"
-  ],
-  "inspectedentity": [
-    "Entity"
-  ],
-  "inspector": [
-    "Entity"
-  ],
-  "instrument": [
-    "Entity"
-  ],
-  "investigator": [
-    "Entity"
+    "injurer"
   ],
   "jailer": [
-    "Entity"
+    "jailer"
   ],
-  "judgecourt": [
-    "Entity"
-  ],
-  "killer": [
-    "Entity"
-  ],
-  "law": [
-    "Entity"
-  ],
-  "manufacturer": [
-    "Entity"
+  "defendant": [
+    "defendant"
   ],
   "money": [
-    "Entity"
+    "money"
   ],
-  "monitor": [
-    "Entity"
-  ],
-  "monitoredentity": [
-    "Entity"
-  ],
-  "observedentity": [
-    "Entity"
-  ],
-  "observer": [
-    "Entity"
-  ],
-  "origin": [
-    "Entity"
-  ],
-  "otherparticipant": [
-    "Entity"
-  ],
-  "participant": [
-    "Entity"
-  ],
-  "passenger": [
-    "Entity"
-  ],
-  "place": [
-    "Entity"
-  ],
-  "placeofemployment": [
-    "Entity"
-  ],
-  "preventer": [
-    "Entity"
-  ],
-  "prosecutor": [
-    "Entity"
-  ],
-  "recipient": [
-    "Entity"
-  ],
-  "rejecternullifier": [
-    "Entity"
-  ],
-  "result": [
-    "Entity"
-  ],
-  "retreater": [
-    "Entity"
-  ],
-  "spy": [
-    "Entity"
-  ],
-  "surrenderer": [
-    "Entity"
-  ],
-  "target": [
-    "Entity"
-  ],
-  "territoryorfacility": [
-    "Entity"
+  "inspector": [
+    "inspector"
   ],
   "transporter": [
-    "Entity"
+    "transporter"
   ],
-  "vehicle": [
-    "Entity"
+  "communicator": [
+    "communicator"
+  ],
+  "gpe": [
+    "gpe"
+  ],
+  "origin": [
+    "origin"
+  ],
+  "extraditer": [
+    "extraditer"
+  ],
+  "placeofemployment": [
+    "placeofemployment"
+  ],
+  "crime": [
+    "crime"
+  ],
+  "hidingplace": [
+    "hidingplace"
+  ],
+  "observer": [
+    "observer"
+  ],
+  "driverpassenger": [
+    "driverpassenger"
+  ],
+  "damager": [
+    "damager"
+  ],
+  "crashobject": [
+    "crashobject"
+  ],
+  "participant": [
+    "participant"
+  ],
+  "executioner": [
+    "executioner"
+  ],
+  "passenger": [
+    "passenger"
   ],
   "victim": [
-    "Entity"
+    "victim"
   ],
-  "violator": [
-    "Entity"
-  ],
-  "voter": [
-    "Entity"
+  "detainee": [
+    "detainee"
   ],
   "yielder": [
-    "Entity"
+    "yielder"
+  ],
+  "attacker": [
+    "attacker"
+  ],
+  "preventer": [
+    "preventer"
+  ],
+  "instrument": [
+    "instrument"
+  ],
+  "violator": [
+    "violator"
+  ],
+  "destination": [
+    "destination"
+  ],
+  "place": [
+    "place"
+  ],
+  "artifactmoney": [
+    "artifactmoney"
+  ],
+  "law": [
+    "law"
+  ],
+  "ballot": [
+    "ballot"
+  ],
+  "inspectedentity": [
+    "inspectedentity"
+  ],
+  "retreater": [
+    "retreater"
+  ],
+  "fireexplosionobject": [
+    "fireexplosionobject"
+  ],
+  "territoryorfacility": [
+    "territoryorfacility"
+  ],
+  "judgecourt": [
+    "judgecourt"
+  ],
+  "target": [
+    "target"
+  ],
+  "founder": [
+    "founder"
+  ],
+  "governmentbody": [
+    "governmentbody"
+  ],
+  "observedentity": [
+    "observedentity"
+  ],
+  "vehicle": [
+    "vehicle"
+  ],
+  "candidate": [
+    "candidate"
+  ],
+  "beneficiary": [
+    "beneficiary"
+  ],
+  "monitor": [
+    "monitor"
+  ],
+  "damagerdestroyer": [
+    "damagerdestroyer"
+  ],
+  "killer": [
+    "killer"
+  ],
+  "employee": [
+    "employee"
+  ],
+  "surrenderer": [
+    "surrenderer"
+  ],
+  "destroyer": [
+    "destroyer"
+  ],
+  "prosecutor": [
+    "prosecutor"
+  ],
+  "manufacturer": [
+    "manufacturer"
+  ],
+  "granter": [
+    "granter"
+  ],
+  "rejecternullifier": [
+    "rejecternullifier"
+  ],
+  "voter": [
+    "voter"
+  ],
+  "result": [
+    "result"
+  ],
+  "recipient": [
+    "recipient"
+  ],
+  "demonstrator": [
+    "demonstrator"
+  ],
+  "monitoredentity": [
+    "monitoredentity"
+  ],
+  "otherparticipant": [
+    "otherparticipant"
+  ],
+  "giver": [
+    "giver"
+  ],
+  "spy": [
+    "spy"
+  ],
+  "artifact": [
+    "artifact"
+  ],
+  "deceased": [
+    "deceased"
+  ],
+  "investigator": [
+    "investigator"
   ]
 }
