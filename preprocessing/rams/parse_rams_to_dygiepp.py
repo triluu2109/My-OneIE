@@ -14,11 +14,8 @@ def read_jsonlines(path):
             data.append(obj)
     return data
 
-raw_data_path = Path(os.getcwd()).parent / "oneie/data/RAMS/"
+raw_data_path = Path(os.getcwd()).parent / "oneie/data/rams/raw/RAMS_1.0/data"
 processed_data_path = Path(os.getcwd()).parent / "oneie/data/rams/processed-data/json"
-
-if os.path.exists(processed_data_path) is False:
-    os.makedirs(processed_data_path)
 
 train_df = pd.DataFrame(read_jsonlines(raw_data_path / "train.jsonlines"))
 val_df = pd.DataFrame(read_jsonlines(raw_data_path / "dev.jsonlines"))
@@ -118,4 +115,6 @@ def process_df(df):
 for df, df_json_outfile in [(train_df, "train.json"), (test_df, "test.json"), (val_df, "dev.json")]:
     print(f'=== Reading "{df_json_outfile}"')
     df_new = process_df(df)
+    if os.path.exists(processed_data_path) is False:
+        os.makedirs(processed_data_path)
     df_new.to_json(str(Path(processed_data_path / df_json_outfile)), orient='records', lines=True)

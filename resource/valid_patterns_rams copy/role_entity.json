@@ -1,0 +1,252 @@
+{
+    "retreater": [
+        "retreater"
+    ],
+    "monitoredentity": [
+        "monitoredentity"
+    ],
+    "passenger": [
+        "passenger",
+        "origin"
+    ],
+    "observer": [
+        "observer"
+    ],
+    "attacker": [
+        "attacker",
+        "instrument",
+        "target",
+        "place"
+    ],
+    "voter": [
+        "voter"
+    ],
+    "executioner": [
+        "executioner",
+        "place"
+    ],
+    "rejecternullifier": [
+        "rejecternullifier"
+    ],
+    "gpe": [
+        "gpe"
+    ],
+    "otherparticipant": [
+        "otherparticipant"
+    ],
+    "crime": [
+        "crime"
+    ],
+    "violator": [
+        "violator",
+        "otherparticipant",
+        "place"
+    ],
+    "place": [
+        "place"
+    ],
+    "recipient": [
+        "recipient",
+        "beneficiary",
+        "money",
+        "place",
+        "artifact"
+    ],
+    "prosecutor": [
+        "prosecutor",
+        "judgecourt",
+        "place"
+    ],
+    "granter": [
+        "destination",
+        "granter"
+    ],
+    "destination": [
+        "destination"
+    ],
+    "preventer": [
+        "preventer",
+        "giver",
+        "origin"
+    ],
+    "injurer": [
+        "injurer",
+        "place"
+    ],
+    "manufacturer": [
+        "manufacturer",
+        "place"
+    ],
+    "damager": [
+        "damager",
+        "instrument"
+    ],
+    "victim": [
+        "victim",
+        "place"
+    ],
+    "ballot": [
+        "result",
+        "ballot"
+    ],
+    "candidate": [
+        "candidate"
+    ],
+    "artifactmoney": [
+        "place",
+        "artifactmoney"
+    ],
+    "origin": [
+        "origin",
+        "destination"
+    ],
+    "hidingplace": [
+        "hidingplace"
+    ],
+    "defendant": [
+        "defendant"
+    ],
+    "jailer": [
+        "jailer",
+        "place"
+    ],
+    "demonstrator": [
+        "demonstrator"
+    ],
+    "extraditer": [
+        "destination",
+        "origin",
+        "extraditer"
+    ],
+    "yielder": [
+        "yielder"
+    ],
+    "damagerdestroyer": [
+        "damagerdestroyer"
+    ],
+    "employee": [
+        "employee",
+        "placeofemployment"
+    ],
+    "investigator": [
+        "investigator",
+        "place"
+    ],
+    "participant": [
+        "participant",
+        "beneficiary",
+        "place"
+    ],
+    "result": [
+        "result"
+    ],
+    "detainee": [
+        "detainee"
+    ],
+    "fireexplosionobject": [
+        "place",
+        "fireexplosionobject",
+        "instrument"
+    ],
+    "transporter": [
+        "transporter",
+        "origin",
+        "passenger",
+        "destination",
+        "vehicle"
+    ],
+    "placeofemployment": [
+        "placeofemployment",
+        "place"
+    ],
+    "observedentity": [
+        "observedentity"
+    ],
+    "destroyer": [
+        "destroyer"
+    ],
+    "founder": [
+        "founder"
+    ],
+    "inspectedentity": [
+        "inspectedentity"
+    ],
+    "money": [
+        "money",
+        "place"
+    ],
+    "inspector": [
+        "inspector"
+    ],
+    "governmentbody": [
+        "governmentbody"
+    ],
+    "law": [
+        "law"
+    ],
+    "spy": [
+        "spy",
+        "place"
+    ],
+    "vehicle": [
+        "vehicle"
+    ],
+    "instrument": [
+        "instrument"
+    ],
+    "judgecourt": [
+        "judgecourt",
+        "place"
+    ],
+    "monitor": [
+        "monitor"
+    ],
+    "driverpassenger": [
+        "driverpassenger"
+    ],
+    "territoryorfacility": [
+        "territoryorfacility",
+        "place"
+    ],
+    "artifact": [
+        "artifact",
+        "place",
+        "destination"
+    ],
+    "killer": [
+        "place",
+        "killer",
+        "instrument",
+        "victim"
+    ],
+    "giver": [
+        "giver",
+        "beneficiary",
+        "place",
+        "recipient"
+    ],
+    "communicator": [
+        "communicator",
+        "place",
+        "recipient"
+    ],
+    "target": [
+        "target",
+        "artifact",
+        "place"
+    ],
+    "crashobject": [
+        "crashobject"
+    ],
+    "deceased": [
+        "deceased"
+    ],
+    "surrenderer": [
+        "surrenderer",
+        "place"
+    ],
+    "beneficiary": [
+        "beneficiary",
+        "place"
+    ]
+}

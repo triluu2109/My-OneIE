@@ -9,8 +9,8 @@ args = parser.parse_args()
 base_path = Path(Path().absolute().parent)
 
 zero_token_len = False
-
-print(f'Checking {args.input.split("/")[-1]}')
+_seperator = '/' if '/' in args.input else '\\'
+print(f'Checking {args.input.split(_seperator)[-1]}')
 
 with open(base_path / Path(args.input)) as f:
     data = f.read().splitlines()

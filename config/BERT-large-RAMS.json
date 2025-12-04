@@ -7,7 +7,14 @@
     "extra_bert": -3,
 
     "use_global_features": true,
-    "global_features": [],
+    "global_features": [
+        "role_role",
+        "event_role_num",
+        "role_entity",
+        "multi_role",
+        "event_role_event_role",
+        "multi_event"
+    ],
     "global_warmup": 5,
 
     "linear_dropout": 0.4,
@@ -26,9 +33,9 @@
     "relation_directional": false,
     "symmetric_relations": [],
 
-    "train_file": "data/oneie/rams/train.oneie.json",
-    "dev_file": "data/oneie/rams/dev.oneie.json",
-    "test_file": "data/oneie/rams/test.oneie.json",
+    "train_file": "data/oneie/rams/json/train.oneie.json",
+    "dev_file": "data/oneie/rams/json/dev.oneie.json",
+    "test_file": "data/oneie/rams/json/test.oneie.json",
     "valid_pattern_path": "resource/valid_patterns_rams",
     "log_path": "logs/rams_bert_large",
     "ignore_title": false,
