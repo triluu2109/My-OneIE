@@ -1,7 +1,6 @@
 import torch
 import torch.nn as nn
-from transformers import (BertModel, RobertaModel, XLMRobertaModel,
-                          AlbertModel)
+from transformers import BertModel, RobertaModel, XLMRobertaModel, AlbertModel
 
 from .graph import Graph
 from .global_feature import generate_global_feature_vector, generate_global_feature_maps
@@ -74,10 +73,13 @@ def token_lens_to_idxs(token_lens):
         seq_idxs, seq_masks = [], []
         offset = 0
         for token_len in seq_token_lens:
-            seq_idxs.extend([i + offset for i in range(token_len)]
-                            + [-1] * (max_token_len - token_len))
-            seq_masks.extend([1.0 / token_len] * token_len
-                             + [0.0] * (max_token_len - token_len))
+            seq_idxs.extend(
+                [i + offset for i in range(token_len)]
+                + [-1] * (max_token_len - token_len)
+            )
+            seq_masks.extend(
+                [1.0 / token_len] * token_len + [0.0] * (max_token_len - token_len)
+            )
             offset += token_len
         seq_idxs.extend([-1] * max_token_len * (max_token_num - len(seq_token_lens)))
         seq_masks.extend([0.0] * max_token_len * (max_token_num - len(seq_token_lens)))
@@ -95,10 +97,12 @@ def graphs_to_node_idxs(graphs):
     trigger_idxs, trigger_masks = [], []
     max_entity_num = max(max(graph.entity_num for graph in graphs), 1)
     max_trigger_num = max(max(graph.trigger_num for graph in graphs), 1)
-    max_entity_len = max(max([e[1] - e[0] for e in graph.entities] + [1])
-                         for graph in graphs)
-    max_trigger_len = max(max([t[1] - t[0] for t in graph.triggers] + [1])
-                          for graph in graphs)
+    max_entity_len = max(
+        max([e[1] - e[0] for e in graph.entities] + [1]) for graph in graphs
+    )
+    max_trigger_len = max(
+        max([t[1] - t[0] for t in graph.triggers] + [1]) for graph in graphs
+    )
     for graph in graphs:
         seq_entity_idxs, seq_entity_masks = [], []
         seq_trigger_idxs, seq_trigger_masks = [], []
@@ -108,8 +112,12 @@ def graphs_to_node_idxs(graphs):
             seq_entity_idxs.extend([0] * (max_entity_len - entity_len))
             seq_entity_masks.extend([1.0 / entity_len] * entity_len)
             seq_entity_masks.extend([0.0] * (max_entity_len - entity_len))
-        seq_entity_idxs.extend([0] * max_entity_len * (max_entity_num - graph.entity_num))
-        seq_entity_masks.extend([0.0] * max_entity_len * (max_entity_num - graph.entity_num))
+        seq_entity_idxs.extend(
+            [0] * max_entity_len * (max_entity_num - graph.entity_num)
+        )
+        seq_entity_masks.extend(
+            [0.0] * max_entity_len * (max_entity_num - graph.entity_num)
+        )
         entity_idxs.append(seq_entity_idxs)
         entity_masks.append(seq_entity_masks)
 
@@ -119,20 +127,34 @@ def graphs_to_node_idxs(graphs):
             seq_trigger_idxs.extend([0] * (max_trigger_len - trigger_len))
             seq_trigger_masks.extend([1.0 / trigger_len] * trigger_len)
             seq_trigger_masks.extend([0.0] * (max_trigger_len - trigger_len))
-        seq_trigger_idxs.extend([0] * max_trigger_len * (max_trigger_num - graph.trigger_num))
-        seq_trigger_masks.extend([0.0] * max_trigger_len * (max_trigger_num - graph.trigger_num))
+        seq_trigger_idxs.extend(
+            [0] * max_trigger_len * (max_trigger_num - graph.trigger_num)
+        )
+        seq_trigger_masks.extend(
+            [0.0] * max_trigger_len * (max_trigger_num - graph.trigger_num)
+        )
         trigger_idxs.append(seq_trigger_idxs)
         trigger_masks.append(seq_trigger_masks)
 
     return (
-        entity_idxs, entity_masks, max_entity_num, max_entity_len,
-        trigger_idxs, trigger_masks, max_trigger_num, max_trigger_len,
+        entity_idxs,
+        entity_masks,
+        max_entity_num,
+        max_entity_len,
+        trigger_idxs,
+        trigger_masks,
+        max_trigger_num,
+        max_trigger_len,
     )
 
 
-def graphs_to_label_idxs(graphs, max_entity_num=-1, max_trigger_num=-1,
-                         relation_directional=False,
-                         symmetric_relation_idxs=None):
+def graphs_to_label_idxs(
+    graphs,
+    max_entity_num=-1,
+    max_trigger_num=-1,
+    relation_directional=False,
+    symmetric_relation_idxs=None,
+):
     """Convert a list of graphs to label index and mask matrices
     :param graphs (list): A list of Graph objects.
     :param max_entity_num (int) Max entity number (default = -1).
@@ -143,18 +165,31 @@ def graphs_to_label_idxs(graphs, max_entity_num=-1, max_trigger_num=-1,
     if max_trigger_num == -1:
         max_trigger_num = max(max([g.trigger_num for g in graphs]), 1)
     (
-        batch_entity_idxs, batch_entity_mask,
-        batch_trigger_idxs, batch_trigger_mask,
-        batch_relation_idxs, batch_relation_mask,
-        batch_role_idxs, batch_role_mask
+        batch_entity_idxs,
+        batch_entity_mask,
+        batch_trigger_idxs,
+        batch_trigger_mask,
+        batch_relation_idxs,
+        batch_relation_mask,
+        batch_role_idxs,
+        batch_role_mask,
     ) = [[] for _ in range(8)]
     for graph in graphs:
         (
-            entity_idxs, entity_mask, trigger_idxs, trigger_mask,
-            relation_idxs, relation_mask, role_idxs, role_mask,
-        ) = graph.to_label_idxs(max_entity_num, max_trigger_num,
-                                relation_directional=relation_directional,
-                                symmetric_relation_idxs=symmetric_relation_idxs)
+            entity_idxs,
+            entity_mask,
+            trigger_idxs,
+            trigger_mask,
+            relation_idxs,
+            relation_mask,
+            role_idxs,
+            role_mask,
+        ) = graph.to_label_idxs(
+            max_entity_num,
+            max_trigger_num,
+            relation_directional=relation_directional,
+            symmetric_relation_idxs=symmetric_relation_idxs,
+        )
         batch_entity_idxs.append(entity_idxs)
         batch_entity_mask.append(entity_mask)
         batch_trigger_idxs.append(trigger_idxs)
@@ -164,10 +199,14 @@ def graphs_to_label_idxs(graphs, max_entity_num=-1, max_trigger_num=-1,
         batch_role_idxs.append(role_idxs)
         batch_role_mask.append(role_mask)
     return (
-        batch_entity_idxs, batch_entity_mask,
-        batch_trigger_idxs, batch_trigger_mask,
-        batch_relation_idxs, batch_relation_mask,
-        batch_role_idxs, batch_role_mask
+        batch_entity_idxs,
+        batch_entity_mask,
+        batch_trigger_idxs,
+        batch_trigger_mask,
+        batch_relation_idxs,
+        batch_relation_mask,
+        batch_role_idxs,
+        batch_role_mask,
     )
 
 
@@ -214,7 +253,7 @@ def tag_paths_to_spans(paths, token_nums, vocab):
     for i, path in enumerate(paths):
         mentions = []
         cur_mention = None
-        path = path.tolist()[:token_nums[i].item()]
+        path = path.tolist()[: token_nums[i].item()]
         for j, tag in enumerate(path):
             tag = itos[tag]
             if tag == 'O':
@@ -248,11 +287,16 @@ def tag_paths_to_spans(paths, token_nums, vocab):
 
 class Linears(nn.Module):
     """Multiple linear layers with Dropout."""
+
     def __init__(self, dimensions, activation='relu', dropout_prob=0.0, bias=True):
         super().__init__()
         assert len(dimensions) > 1
-        self.layers = nn.ModuleList([nn.Linear(dimensions[i], dimensions[i + 1], bias=bias)
-                                     for i in range(len(dimensions) - 1)])
+        self.layers = nn.ModuleList(
+            [
+                nn.Linear(dimensions[i], dimensions[i + 1], bias=bias)
+                for i in range(len(dimensions) - 1)
+            ]
+        )
         self.activation = getattr(torch, activation)
         self.dropout = nn.Dropout(dropout_prob)
 
@@ -307,33 +351,29 @@ class CRF(nn.Module):
                         [
                             label_from_prefix in ['O', 'E', 'S']
                             and label_to_prefix in ['O', 'B', 'S'],
-
                             label_from_prefix in ['B', 'I']
                             and label_to_prefix in ['I', 'E']
-                            and label_from_type == label_to_type
+                            and label_from_type == label_to_type,
                         ]
                     )
                 else:
                     is_allowed = any(
                         [
                             label_to_prefix in ['B', 'O'],
-
                             label_from_prefix in ['B', 'I']
                             and label_to_prefix == 'I'
-                            and label_from_type == label_to_type
+                            and label_from_type == label_to_type,
                         ]
                     )
                 if not is_allowed:
-                    self.transition.data[
-                        label_to_idx, label_from_idx] = -100.0
+                    self.transition.data[label_to_idx, label_from_idx] = -100.0
 
     def pad_logits(self, logits):
         """Pad the linear layer output with <SOS> and <EOS> scores.
         :param logits: Linear layer output (no non-linear function).
         """
         batch_size, seq_len, _ = logits.size()
-        pads = logits.new_full((batch_size, seq_len, 2), -100.0,
-                               requires_grad=False)
+        pads = logits.new_full((batch_size, seq_len, 2), -100.0, requires_grad=False)
         logits = torch.cat([logits, pads], dim=2)
         return logits
 
@@ -351,8 +391,7 @@ class CRF(nn.Module):
         labels = labels_ext
 
         trn = self.transition
-        trn_exp = trn.unsqueeze(0).expand(batch_size, self.label_size,
-                                          self.label_size)
+        trn_exp = trn.unsqueeze(0).expand(batch_size, self.label_size, self.label_size)
         lbl_r = labels[:, 1:]
         lbl_rexp = lbl_r.unsqueeze(-1).expand(*lbl_r.size(), self.label_size)
         # score of jumping to a tag
@@ -378,8 +417,7 @@ class CRF(nn.Module):
 
     def calc_gold_score(self, logits, labels, lens):
         """Checked"""
-        unary_score = self.calc_unary_score(logits, labels, lens).sum(
-            1).squeeze(-1)
+        unary_score = self.calc_unary_score(logits, labels, lens).sum(1).squeeze(-1)
         binary_score = self.calc_binary_score(labels, lens).sum(1).squeeze(-1)
         return unary_score + binary_score
 
@@ -391,12 +429,12 @@ class CRF(nn.Module):
 
         logits_t = logits.transpose(1, 0)
         for logit in logits_t:
-            logit_exp = logit.unsqueeze(-1).expand(batch_size,
-                                                   self.label_size,
-                                                   self.label_size)
-            alpha_exp = alpha.unsqueeze(1).expand(batch_size,
-                                                  self.label_size,
-                                                  self.label_size)
+            logit_exp = logit.unsqueeze(-1).expand(
+                batch_size, self.label_size, self.label_size
+            )
+            alpha_exp = alpha.unsqueeze(1).expand(
+                batch_size, self.label_size, self.label_size
+            )
             trans_exp = self.transition.unsqueeze(0).expand_as(alpha_exp)
             mat = logit_exp + alpha_exp + trans_exp
             alpha_nxt = log_sum_exp(mat, 2).squeeze(-1)
@@ -442,8 +480,7 @@ class CRF(nn.Module):
             vit = mask * vit_nxt + (1 - mask) * vit
 
             mask = (c_lens == 1).float().unsqueeze(-1).expand_as(vit_nxt)
-            vit += mask * self.transition[self.end].unsqueeze(
-                0).expand_as(vit_nxt)
+            vit += mask * self.transition[self.end].unsqueeze(0).expand_as(vit_nxt)
 
             c_lens = c_lens - 1
 
@@ -469,15 +506,14 @@ class CRF(nn.Module):
         scores = [[] for _ in range(batch_size)]
         pre_labels = [self.start] * batch_size
         for i, logit in enumerate(logits_t):
-            logit_exp = logit.unsqueeze(-1).expand(batch_size,
-                                                   self.label_size,
-                                                   self.label_size)
-            trans_exp = self.transition.unsqueeze(0).expand(batch_size,
-                                                            self.label_size,
-                                                            self.label_size)
+            logit_exp = logit.unsqueeze(-1).expand(
+                batch_size, self.label_size, self.label_size
+            )
+            trans_exp = self.transition.unsqueeze(0).expand(
+                batch_size, self.label_size, self.label_size
+            )
             score = logit_exp + trans_exp
-            score = score.view(-1, self.label_size * self.label_size) \
-                .softmax(1)
+            score = score.view(-1, self.label_size * self.label_size).softmax(1)
             for j in range(batch_size):
                 cur_label = labels[j][i]
                 cur_score = score[j][cur_label * self.label_size + pre_labels[j]]
@@ -487,10 +523,7 @@ class CRF(nn.Module):
 
 
 class OneIE(nn.Module):
-    def __init__(self,
-                 config,
-                 vocabs,
-                 valid_patterns=None):
+    def __init__(self, config, vocabs, valid_patterns=None):
         super().__init__()
 
         # vocabularies
@@ -502,8 +535,8 @@ class OneIE(nn.Module):
         self.event_type_stoi = vocabs['event_type']
         self.relation_type_stoi = vocabs['relation_type']
         self.role_type_stoi = vocabs['role_type']
-        self.entity_label_itos = {i:s for s, i in self.entity_label_stoi.items()}
-        self.trigger_label_itos = {i:s for s, i in self.trigger_label_stoi.items()}
+        self.entity_label_itos = {i: s for s, i in self.entity_label_stoi.items()}
+        self.trigger_label_itos = {i: s for s, i in self.trigger_label_stoi.items()}
         self.entity_type_itos = {i: s for s, i in self.entity_type_stoi.items()}
         self.event_type_itos = {i: s for s, i in self.event_type_stoi.items()}
         self.relation_type_itos = {i: s for s, i in self.relation_type_stoi.items()}
@@ -524,7 +557,6 @@ class OneIE(nn.Module):
             self.valid_role_entity = valid_patterns['role_entity']
         self.relation_directional = config.relation_directional
         self.symmetric_relations = config.symmetric_relations
-        print(f'self.relation_type_stoi: {self.relation_type_stoi}')
         # self.symmetric_relation_idxs = {self.relation_type_stoi[r]
         #                                 for r in self.symmetric_relations}
         self.symmetric_relation_idxs = {0}
@@ -537,17 +569,17 @@ class OneIE(nn.Module):
         self.use_extra_bert = config.use_extra_bert
         if self.use_extra_bert:
             self.bert_dim *= 2
-            
+
         # initiate model
         if config.bert_model_name.startswith('bert-'):
-            self.bert =  BertModel(bert_config)
+            self.bert = BertModel(bert_config)
         elif config.bert_model_name.startswith('roberta-'):
-            self.bert =  RobertaModel(bert_config)
+            self.bert = RobertaModel(bert_config)
         elif config.bert_model_name.startswith('xlm-roberta-'):
-            self.bert =  XLMRobertaModel(bert_config)
+            self.bert = XLMRobertaModel(bert_config)
         elif config.bert_model_name.startswith('albert-'):
             # "albert-xlarge-v2"
-            self.bert =  AlbertModel(bert_config)
+            self.bert = AlbertModel(bert_config)
 
         self.bert_dropout = nn.Dropout(p=config.bert_dropout)
         self.multi_piece = config.multi_piece_strategy
@@ -561,45 +593,57 @@ class OneIE(nn.Module):
         event_hidden_num = config.event_hidden_num
         relation_hidden_num = config.relation_hidden_num
         role_hidden_num = config.role_hidden_num
-        role_input_dim = self.binary_dim + (self.entity_type_num if self.use_entity_type else 0)
-        self.entity_label_ffn = nn.Linear(self.bert_dim, self.entity_label_num,
-                                        bias=linear_bias)
-        self.trigger_label_ffn = nn.Linear(self.bert_dim, self.trigger_label_num,
-                                         bias=linear_bias)
-        self.entity_type_ffn = Linears([self.bert_dim, entity_hidden_num,
-                                        self.entity_type_num],
-                                       dropout_prob=linear_dropout,
-                                       bias=linear_bias,
-                                       activation=config.linear_activation)
-        self.mention_type_ffn = Linears([self.bert_dim, mention_hidden_num,
-                                         self.mention_type_num],
-                                        dropout_prob=linear_dropout,
-                                        bias=linear_bias,
-                                        activation=config.linear_activation)
-        self.event_type_ffn = Linears([self.bert_dim, event_hidden_num,
-                                       self.event_type_num],
-                                      dropout_prob=linear_dropout,
-                                      bias=linear_bias,
-                                      activation=config.linear_activation)
-        self.relation_type_ffn = Linears([self.binary_dim, relation_hidden_num,
-                                          self.relation_type_num],
-                                         dropout_prob=linear_dropout,
-                                         bias=linear_bias,
-                                         activation=config.linear_activation)
-        self.role_type_ffn = Linears([role_input_dim, role_hidden_num,
-                                      self.role_type_num],
-                                     dropout_prob=linear_dropout,
-                                     bias=linear_bias,
-                                     activation=config.linear_activation)
+        role_input_dim = self.binary_dim + (
+            self.entity_type_num if self.use_entity_type else 0
+        )
+        self.entity_label_ffn = nn.Linear(
+            self.bert_dim, self.entity_label_num, bias=linear_bias
+        )
+        self.trigger_label_ffn = nn.Linear(
+            self.bert_dim, self.trigger_label_num, bias=linear_bias
+        )
+        self.entity_type_ffn = Linears(
+            [self.bert_dim, entity_hidden_num, self.entity_type_num],
+            dropout_prob=linear_dropout,
+            bias=linear_bias,
+            activation=config.linear_activation,
+        )
+        self.mention_type_ffn = Linears(
+            [self.bert_dim, mention_hidden_num, self.mention_type_num],
+            dropout_prob=linear_dropout,
+            bias=linear_bias,
+            activation=config.linear_activation,
+        )
+        self.event_type_ffn = Linears(
+            [self.bert_dim, event_hidden_num, self.event_type_num],
+            dropout_prob=linear_dropout,
+            bias=linear_bias,
+            activation=config.linear_activation,
+        )
+        self.relation_type_ffn = Linears(
+            [self.binary_dim, relation_hidden_num, self.relation_type_num],
+            dropout_prob=linear_dropout,
+            bias=linear_bias,
+            activation=config.linear_activation,
+        )
+        self.role_type_ffn = Linears(
+            [role_input_dim, role_hidden_num, self.role_type_num],
+            dropout_prob=linear_dropout,
+            bias=linear_bias,
+            activation=config.linear_activation,
+        )
         # global features
         self.use_global_features = config.use_global_features
         self.global_features = config.global_features
         self.global_feature_maps = generate_global_feature_maps(vocabs, valid_patterns)
-        self.global_feature_num = sum(len(m) for k, m in self.global_feature_maps.items()
-                                      if k in self.global_features or
-                                      not self.global_features)
+        self.global_feature_num = sum(
+            len(m)
+            for k, m in self.global_feature_maps.items()
+            if k in self.global_features or not self.global_features
+        )
         self.global_feature_weights = nn.Parameter(
-            torch.zeros(self.global_feature_num).fill_(-0.0001))
+            torch.zeros(self.global_feature_num).fill_(-0.0001)
+        )
         # decoder
         self.beam_size = config.beam_size
         self.beta_v = config.beta_v
@@ -622,23 +666,22 @@ class OneIE(nn.Module):
         """
         print('Loading pre-trained BERT model {}'.format(name))
         if name.startswith('bert-'):
-            self.bert = BertModel.from_pretrained(name,
-                                                cache_dir=cache_dir,
-                                                output_hidden_states=True)
-
+            self.bert = BertModel.from_pretrained(
+                name, cache_dir=cache_dir, output_hidden_states=True
+            )
         elif name.startswith('roberta-'):
-            self.bert =  RobertaModel.from_pretrained(name,
-                                                 cache_dir=cache_dir,
-                                                 output_hidden_states=True)
+            self.bert = RobertaModel.from_pretrained(
+                name, cache_dir=cache_dir, output_hidden_states=True
+            )
         elif name.startswith('xlm-roberta-'):
-            self.bert =  XLMRobertaModel.from_pretrained(name,
-                                                    cache_dir=cache_dir,
-                                                    output_hidden_states=True)
+            self.bert = XLMRobertaModel.from_pretrained(
+                name, cache_dir=cache_dir, output_hidden_states=True
+            )
         elif name.startswith('albert-'):
             # "albert-xlarge-v2"
-            self.bert = AlbertModel.from_pretrained(name,
-                                                cache_dir=cache_dir,
-                                                output_hidden_states=True)
+            self.bert = AlbertModel.from_pretrained(
+                name, cache_dir=cache_dir, output_hidden_states=True
+            )
         else:
             raise ValueError('Unknown model: {}'.format(name))
 
@@ -666,22 +709,35 @@ class OneIE(nn.Module):
         elif self.multi_piece == 'average':
             # average all pieces for multi-piece words
             idxs, masks, token_num, token_len = token_lens_to_idxs(token_lens)
-            idxs = piece_idxs.new(idxs).unsqueeze(-1).expand(batch_size, -1, self.bert_dim) + 1
+            idxs = (
+                piece_idxs.new(idxs).unsqueeze(-1).expand(batch_size, -1, self.bert_dim)
+                + 1
+            )
             masks = bert_outputs.new(masks).unsqueeze(-1)
             bert_outputs = torch.gather(bert_outputs, 1, idxs) * masks
-            bert_outputs = bert_outputs.view(batch_size, token_num, token_len, self.bert_dim)
+            bert_outputs = bert_outputs.view(
+                batch_size, token_num, token_len, self.bert_dim
+            )
             bert_outputs = bert_outputs.sum(2)
         else:
-            raise ValueError('Unknown multi-piece token handling strategy: {}'
-                             .format(self.multi_piece))
+            raise ValueError(
+                'Unknown multi-piece token handling strategy: {}'.format(
+                    self.multi_piece
+                )
+            )
         bert_outputs = self.bert_dropout(bert_outputs)
         return bert_outputs
 
-    def scores(self, bert_outputs, graphs, entity_types_onehot=None,
-               predict=False):
+    def scores(self, bert_outputs, graphs, entity_types_onehot=None, predict=False):
         (
-            entity_idxs, entity_masks, entity_num, entity_len,
-            trigger_idxs, trigger_masks, trigger_num, trigger_len,
+            entity_idxs,
+            entity_masks,
+            entity_num,
+            entity_len,
+            trigger_idxs,
+            trigger_masks,
+            trigger_num,
+            trigger_len,
         ) = graphs_to_node_idxs(graphs)
 
         batch_size, _, bert_dim = bert_outputs.size()
@@ -708,7 +764,9 @@ class OneIE(nn.Module):
         trigger_masks = trigger_masks.unsqueeze(-1).expand(-1, -1, bert_dim)
         trigger_words = torch.gather(bert_outputs, 1, trigger_idxs)
         trigger_words = trigger_words * trigger_masks
-        trigger_words = trigger_words.view(batch_size, trigger_num, trigger_len, bert_dim)
+        trigger_words = trigger_words.view(
+            batch_size, trigger_num, trigger_len, bert_dim
+        )
         trigger_reprs = trigger_words.sum(2)
         event_type_scores = self.event_type_ffn(trigger_reprs)
 
@@ -732,64 +790,82 @@ class OneIE(nn.Module):
         if self.use_entity_type:
             if predict:
                 entity_type_scores_softmax = entity_type_scores.softmax(dim=2)
-                entity_type_scores_softmax = entity_type_scores_softmax.repeat(1, trigger_num, 1)
+                entity_type_scores_softmax = entity_type_scores_softmax.repeat(
+                    1, trigger_num, 1
+                )
                 te_reprs = torch.cat([te_reprs, entity_type_scores_softmax], dim=2)
             else:
                 entity_types_onehot = entity_types_onehot.repeat(1, trigger_num, 1)
                 te_reprs = torch.cat([te_reprs, entity_types_onehot], dim=2)
         role_type_scores = self.role_type_ffn(te_reprs)
 
-        return (entity_type_scores, mention_type_scores, event_type_scores,
-                relation_type_scores, role_type_scores)
+        return (
+            entity_type_scores,
+            mention_type_scores,
+            event_type_scores,
+            relation_type_scores,
+            role_type_scores,
+        )
 
     def forward(self, batch):
         try:
             # encoding
-            bert_outputs = self.encode(batch.piece_idxs,
-                                       batch.attention_masks,
-                                       batch.token_lens)
+            bert_outputs = self.encode(
+                batch.piece_idxs,
+                batch.attention_masks,
+                batch.token_lens
+            )
             batch_size, _, _ = bert_outputs.size()
             # entity type indices -> one hot
             entity_types = batch.entity_type_idxs.view(batch_size, -1)
             entity_types = torch.clamp(entity_types, min=0)
-            entity_types_onehot = bert_outputs.new_zeros(*entity_types.size(),
-                                                          self.entity_type_num)
+            entity_types_onehot = bert_outputs.new_zeros(
+                *entity_types.size(), self.entity_type_num
+            )
             entity_types_onehot.scatter_(2, entity_types.unsqueeze(-1), 1)
             # identification
             entity_label_scores = self.entity_label_ffn(bert_outputs)
             trigger_label_scores = self.trigger_label_ffn(bert_outputs)
 
             entity_label_scores = self.entity_crf.pad_logits(entity_label_scores)
-            entity_label_loglik = self.entity_crf.loglik(entity_label_scores,
-                                                         batch.entity_label_idxs,
-                                                         batch.token_nums)
+            entity_label_loglik = self.entity_crf.loglik(
+                entity_label_scores,
+                batch.entity_label_idxs,
+                batch.token_nums
+            )
             trigger_label_scores = self.trigger_crf.pad_logits(trigger_label_scores)
-            trigger_label_loglik = self.trigger_crf.loglik(trigger_label_scores,
-                                                           batch.trigger_label_idxs,
-                                                           batch.token_nums)
+            trigger_label_loglik = self.trigger_crf.loglik(
+                trigger_label_scores, batch.trigger_label_idxs, batch.token_nums
+            )
             # classification
             scores = self.scores(bert_outputs, batch.graphs, entity_types_onehot)
+
             (
-                entity_type_scores, mention_type_scores, event_type_scores,
-                relation_type_scores, role_type_scores
+                entity_type_scores,
+                mention_type_scores,
+                event_type_scores,
+                relation_type_scores,
+                role_type_scores,
             ) = scores
+
             entity_type_scores = entity_type_scores.view(-1, self.entity_type_num)
             event_type_scores = event_type_scores.view(-1, self.event_type_num)
             relation_type_scores = relation_type_scores.view(-1, self.relation_type_num)
             role_type_scores = role_type_scores.view(-1, self.role_type_num)
             mention_type_scores = mention_type_scores.view(-1, self.mention_type_num)
-            classification_loss = self.entity_criteria(entity_type_scores,
-                                                       batch.entity_type_idxs) + \
-                                  self.event_criteria(event_type_scores,
-                                                      batch.event_type_idxs) + \
-                                  self.relation_criteria(relation_type_scores,
-                                                         batch.relation_type_idxs) + \
-                                  self.role_criteria(role_type_scores,
-                                                     batch.role_type_idxs) + \
-                                  self.mention_criteria(mention_type_scores,
-                                                        batch.mention_type_idxs)
+            classification_loss = (
+                self.entity_criteria(entity_type_scores, batch.entity_type_idxs)
+                + self.event_criteria(event_type_scores, batch.event_type_idxs)
+                + self.relation_criteria(relation_type_scores, batch.relation_type_idxs)
+                + self.role_criteria(role_type_scores, batch.role_type_idxs)
+                + self.mention_criteria(mention_type_scores, batch.mention_type_idxs)
+            )
 
-            loss = classification_loss - entity_label_loglik.mean() - trigger_label_loglik.mean()
+            loss = (
+                classification_loss
+                - entity_label_loglik.mean()
+                - trigger_label_loglik.mean()
+            )
 
             # global features
             if self.use_global_features:
@@ -807,9 +883,9 @@ class OneIE(nn.Module):
     def predict(self, batch):
         self.eval()
 
-        bert_outputs = self.encode(batch.piece_idxs,
-                                   batch.attention_masks,
-                                   batch.token_lens)
+        bert_outputs = self.encode(
+            batch.piece_idxs, batch.attention_masks, batch.token_lens
+        )
         batch_size, _, _ = bert_outputs.size()
 
         # identification
@@ -817,18 +893,21 @@ class OneIE(nn.Module):
         entity_label_scores = self.entity_crf.pad_logits(entity_label_scores)
         trigger_label_scores = self.trigger_label_ffn(bert_outputs)
         trigger_label_scores = self.trigger_crf.pad_logits(trigger_label_scores)
-        _, entity_label_preds = self.entity_crf.viterbi_decode(entity_label_scores,
-                                                               batch.token_nums)
-        _, trigger_label_preds = self.trigger_crf.viterbi_decode(trigger_label_scores,
-                                                                 batch.token_nums)
-        entities = tag_paths_to_spans(entity_label_preds,
-                                      batch.token_nums,
-                                      self.entity_label_stoi)
-        triggers = tag_paths_to_spans(trigger_label_preds,
-                                      batch.token_nums,
-                                      self.trigger_label_stoi)
-        node_graphs = [Graph(e, t, [], [], self.vocabs)
-                       for e, t in zip(entities, triggers)]
+        _, entity_label_preds = self.entity_crf.viterbi_decode(
+            entity_label_scores, batch.token_nums
+        )
+        _, trigger_label_preds = self.trigger_crf.viterbi_decode(
+            trigger_label_scores, batch.token_nums
+        )
+        entities = tag_paths_to_spans(
+            entity_label_preds, batch.token_nums, self.entity_label_stoi
+        )
+        triggers = tag_paths_to_spans(
+            trigger_label_preds, batch.token_nums, self.trigger_label_stoi
+        )
+        node_graphs = [
+            Graph(e, t, [], [], self.vocabs) for e, t in zip(entities, triggers)
+        ]
         scores = self.scores(bert_outputs, node_graphs, predict=True)
         max_entity_num = max(max(len(seq_entities) for seq_entities in entities), 1)
 
@@ -836,21 +915,25 @@ class OneIE(nn.Module):
         # Decode each sentence in the batch
         for i in range(batch_size):
             seq_entities, seq_triggers = entities[i], triggers[i]
-            spans = sorted([(*i, True) for i in seq_entities] +
-                           [(*i, False) for i in seq_triggers],
-                           key=lambda x: (x[0], x[1], not x[-1]))
+            spans = sorted(
+                [(*i, True) for i in seq_entities]
+                + [(*i, False) for i in seq_triggers],
+                key=lambda x: (x[0], x[1], not x[-1]),
+            )
             entity_num, trigger_num = len(seq_entities), len(seq_triggers)
             if entity_num == 0 and trigger_num == 0:
                 # skip decoding
                 batch_graphs.append(Graph.empty_graph(self.vocabs))
                 continue
-            graph = self.decode(spans,
-                                entity_type_scores=scores[0][i],
-                                mention_type_scores=scores[1][i],
-                                event_type_scores=scores[2][i],
-                                relation_type_scores=scores[3][i],
-                                role_type_scores=scores[4][i],
-                                entity_num=max_entity_num)
+            graph = self.decode(
+                spans,
+                entity_type_scores=scores[0][i],
+                mention_type_scores=scores[1][i],
+                event_type_scores=scores[2][i],
+                relation_type_scores=scores[3][i],
+                role_type_scores=scores[4][i],
+                entity_num=max_entity_num,
+            )
             batch_graphs.append(graph)
 
         self.train()
@@ -858,18 +941,28 @@ class OneIE(nn.Module):
 
     def compute_graph_scores(self, graphs, scores):
         (
-            entity_type_scores, _mention_type_scores,
-            trigger_type_scores, relation_type_scores,
-            role_type_scores
+            entity_type_scores,
+            _mention_type_scores,
+            trigger_type_scores,
+            relation_type_scores,
+            role_type_scores,
         ) = scores
         label_idxs = graphs_to_label_idxs(graphs)
-        label_idxs = [entity_type_scores.new_tensor(idx,
-                                               dtype=torch.long if i % 2 == 0
-                                               else torch.float)
-                      for i, idx in enumerate(label_idxs)]
+        label_idxs = [
+            entity_type_scores.new_tensor(
+                idx, dtype=torch.long if i % 2 == 0 else torch.float
+            )
+            for i, idx in enumerate(label_idxs)
+        ]
         (
-            entity_idxs, entity_mask, trigger_idxs, trigger_mask,
-            relation_idxs, relation_mask, role_idxs, role_mask
+            entity_idxs,
+            entity_mask,
+            trigger_idxs,
+            trigger_mask,
+            relation_idxs,
+            relation_mask,
+            role_idxs,
+            role_mask,
         ) = label_idxs
         # Entity score
         entity_idxs = entity_idxs.unsqueeze(-1)
@@ -894,10 +987,16 @@ class OneIE(nn.Module):
 
         score = entity_score + trigger_score + role_score + relation_score
 
-        global_vectors = [generate_global_feature_vector(g, self.global_feature_maps, features=self.global_features)
-                          for g in graphs]
+        global_vectors = [
+            generate_global_feature_vector(
+                g, self.global_feature_maps, features=self.global_features
+            )
+            for g in graphs
+        ]
         global_vectors = entity_scores.new_tensor(global_vectors)
-        global_weights = self.global_feature_weights.unsqueeze(0).expand_as(global_vectors)
+        global_weights = self.global_feature_weights.unsqueeze(0).expand_as(
+            global_vectors
+        )
         global_score = (global_vectors * global_weights).sum(1)
         score = score + global_score
 
@@ -905,9 +1004,11 @@ class OneIE(nn.Module):
 
     def generate_locally_top_graphs(self, graphs, scores):
         (
-            entity_type_scores, _mention_type_scores,
-            trigger_type_scores, relation_type_scores,
-            role_type_scores
+            entity_type_scores,
+            _mention_type_scores,
+            trigger_type_scores,
+            relation_type_scores,
+            role_type_scores,
         ) = scores
         max_entity_num = max(max([g.entity_num for g in graphs]), 1)
         top_graphs = []
@@ -916,22 +1017,28 @@ class OneIE(nn.Module):
             trigger_num = graph.trigger_num
             _, top_entities = entity_type_scores[graph_idx].max(1)
             top_entities = top_entities.tolist()[:entity_num]
-            top_entities = [(i, j, k) for (i, j, _), k in
-                            zip(graph.entities, top_entities)]
+            top_entities = [
+                (i, j, k) for (i, j, _), k in zip(graph.entities, top_entities)
+            ]
             _, top_triggers = trigger_type_scores[graph_idx].max(1)
             top_triggers = top_triggers.tolist()[:trigger_num]
-            top_triggers = [(i, j, k) for (i, j, _), k in
-                            zip(graph.triggers, top_triggers)]
+            top_triggers = [
+                (i, j, k) for (i, j, _), k in zip(graph.triggers, top_triggers)
+            ]
             # _, top_relations = relation_type_scores[graph_idx].max(1)
             # top_relations = top_relations.tolist()
             # top_relations = [(i, j, top_relations[i * max_entity_num + j])
             #                  for i in range(entity_num) for j in
             #                  range(entity_num)
             #                  if i < j and top_relations[i * max_entity_num + j] != 'O']
-            top_relation_scores, top_relation_labels = relation_type_scores[graph_idx].max(1)
+            top_relation_scores, top_relation_labels = relation_type_scores[
+                graph_idx
+            ].max(1)
             top_relation_scores = top_relation_scores.tolist()
             top_relation_labels = top_relation_labels.tolist()
-            top_relations = [(i, j) for i, j in zip(top_relation_scores, top_relation_labels)]
+            top_relations = [
+                (i, j) for i, j in zip(top_relation_scores, top_relation_labels)
+            ]
             top_relation_list = []
             for i in range(entity_num):
                 for j in range(entity_num):
@@ -940,22 +1047,27 @@ class OneIE(nn.Module):
                         score_2, label_2 = top_relations[j * max_entity_num + i]
                         if score_1 > score_2 and label_1 != 'O':
                             top_relation_list.append((i, j, label_1))
-                        if score_2 > score_1 and label_2 != 'O': 
+                        if score_2 > score_1 and label_2 != 'O':
                             top_relation_list.append((j, i, label_2))
 
             _, top_roles = role_type_scores[graph_idx].max(1)
             top_roles = top_roles.tolist()
-            top_roles = [(i, j, top_roles[i * max_entity_num + j])
-                         for i in range(trigger_num) for j in range(entity_num)
-                         if top_roles[i * max_entity_num + j] != 'O']
-            top_graphs.append(Graph(
-                entities=top_entities,
-                triggers=top_triggers,
-                # relations=top_relations,
-                relations=top_relation_list,
-                roles=top_roles,
-                vocabs=graph.vocabs
-            ))
+            top_roles = [
+                (i, j, top_roles[i * max_entity_num + j])
+                for i in range(trigger_num)
+                for j in range(entity_num)
+                if top_roles[i * max_entity_num + j] != 'O'
+            ]
+            top_graphs.append(
+                Graph(
+                    entities=top_entities,
+                    triggers=top_triggers,
+                    # relations=top_relations,
+                    relations=top_relation_list,
+                    roles=top_roles,
+                    vocabs=graph.vocabs,
+                )
+            )
         return top_graphs
 
     def trim_beam_set(self, beam_set, beam_size):
@@ -967,17 +1079,24 @@ class OneIE(nn.Module):
     def compute_graph_score(self, graph):
         score = graph.graph_local_score
         if self.use_global_features:
-            global_vector = generate_global_feature_vector(graph,
-                                                           self.global_feature_maps,
-                                                           features=self.global_features)
+            global_vector = generate_global_feature_vector(
+                graph, self.global_feature_maps, features=self.global_features
+            )
             global_vector = self.global_feature_weights.new_tensor(global_vector)
             global_score = global_vector.dot(self.global_feature_weights).item()
             score = score + global_score
         return score
 
-    def decode(self, spans, entity_type_scores, mention_type_scores, event_type_scores,
-               relation_type_scores, role_type_scores,
-               entity_num):
+    def decode(
+        self,
+        spans,
+        entity_type_scores,
+        mention_type_scores,
+        event_type_scores,
+        relation_type_scores,
+        role_type_scores,
+        entity_num,
+    ):
         beam_set = [Graph.empty_graph(self.vocabs)]
         entity_idx, trigger_idx = 0, 0
 
@@ -991,10 +1110,11 @@ class OneIE(nn.Module):
             # print(node_scores_norm)
             # print(node_scores)
             # node_scores = [(s, i) for i, s in enumerate(node_scores)]
-            node_scores = [(s, i, n) for i, (s, n) in enumerate(zip(node_scores,
-                                                                node_scores_norm))]
+            node_scores = [
+                (s, i, n) for i, (s, n) in enumerate(zip(node_scores, node_scores_norm))
+            ]
             node_scores.sort(key=lambda x: x[0], reverse=True)
-            top_node_scores = node_scores[:self.beta_v]
+            top_node_scores = node_scores[: self.beta_v]
 
             beam_set_ = []
             for graph in beam_set:
@@ -1014,8 +1134,12 @@ class OneIE(nn.Module):
                     # add relation edges
                     # edge_scores_1 = relation_type_scores[i * entity_num + entity_idx].tolist()
                     # edge_scores_2 = relation_type_scores[entity_idx * entity_num + i].tolist()
-                    edge_scores_1 = relation_type_scores[i * entity_num + entity_idx].tolist()
-                    edge_scores_2 = relation_type_scores[entity_idx * entity_num + i].tolist()
+                    edge_scores_1 = relation_type_scores[
+                        i * entity_num + entity_idx
+                    ].tolist()
+                    edge_scores_2 = relation_type_scores[
+                        entity_idx * entity_num + i
+                    ].tolist()
                     # edge_scores_norm_1 = (edge_scores_1 / 10.0).softmax(0).tolist()
                     # edge_scores_norm_2 = (edge_scores_2 / 10.0).softmax(0).tolist()
                     # edge_scores_1 = edge_scores_1.tolist()
@@ -1024,23 +1148,35 @@ class OneIE(nn.Module):
                     edge_scores_norm_2 = normalize_score(edge_scores_2)
 
                     if self.relation_directional:
-                        edge_scores = [(max(s1, s2), n2 if s1 < s2 else n1, i, s1 < s2)
-                                       for i, (s1, s2, n1, n2)
-                                       in enumerate(zip(edge_scores_1, edge_scores_2,
-                                                        edge_scores_norm_1,
-                                                        edge_scores_norm_2))]
+                        edge_scores = [
+                            (max(s1, s2), n2 if s1 < s2 else n1, i, s1 < s2)
+                            for i, (s1, s2, n1, n2) in enumerate(
+                                zip(
+                                    edge_scores_1,
+                                    edge_scores_2,
+                                    edge_scores_norm_1,
+                                    edge_scores_norm_2,
+                                )
+                            )
+                        ]
                         null_score = edge_scores[0][0]
                         edge_scores.sort(key=lambda x: x[0], reverse=True)
-                        top_edge_scores = edge_scores[:self.beta_e]
+                        top_edge_scores = edge_scores[: self.beta_e]
                     else:
-                        edge_scores = [(max(s1, s2), n2 if s1 < n2 else n1, i, False)
-                                       for i, (s1, s2, n1, n2)
-                                       in enumerate(zip(edge_scores_1, edge_scores_2,
-                                                        edge_scores_norm_1,
-                                                        edge_scores_norm_2))]
+                        edge_scores = [
+                            (max(s1, s2), n2 if s1 < n2 else n1, i, False)
+                            for i, (s1, s2, n1, n2) in enumerate(
+                                zip(
+                                    edge_scores_1,
+                                    edge_scores_2,
+                                    edge_scores_norm_1,
+                                    edge_scores_norm_2,
+                                )
+                            )
+                        ]
                         null_score = edge_scores[0][0]
                         edge_scores.sort(key=lambda x: x[0], reverse=True)
-                        top_edge_scores = edge_scores[:self.beta_e]
+                        top_edge_scores = edge_scores[: self.beta_e]
 
                     beam_set_ = []
                     for graph in beam_set:
@@ -1048,13 +1184,19 @@ class OneIE(nn.Module):
                         for score, score_norm, label, inverse in top_edge_scores:
                             rel_cur_ent = label * 100 + graph.entities[-1][-1]
                             rel_pre_ent = label * 100 + graph.entities[i][-1]
-                            if label == 0 or (rel_pre_ent in self.valid_relation_entity and
-                                              rel_cur_ent in self.valid_relation_entity):
+                            if label == 0 or (
+                                rel_pre_ent in self.valid_relation_entity
+                                and rel_cur_ent in self.valid_relation_entity
+                            ):
                                 graph_ = graph.copy()
                                 if self.relation_directional and inverse:
-                                    graph_.add_relation(entity_idx, i, label, score, score_norm)
+                                    graph_.add_relation(
+                                        entity_idx, i, label, score, score_norm
+                                    )
                                 else:
-                                    graph_.add_relation(i, entity_idx, label, score, score_norm)
+                                    graph_.add_relation(
+                                        i, entity_idx, label, score, score_norm
+                                    )
                                 beam_set_.append(graph_)
                                 has_valid_edge = True
                         if not has_valid_edge:
@@ -1071,10 +1213,13 @@ class OneIE(nn.Module):
                     edge_scores_norm = normalize_score(edge_scores)
                     # edge_scores_norm = (edge_scores / 10.0).softmax(0).tolist()
                     # edge_scores = edge_scores.tolist()
-                    edge_scores = [(s, i, n) for i, (s, n) in enumerate(zip(edge_scores, edge_scores_norm))]
+                    edge_scores = [
+                        (s, i, n)
+                        for i, (s, n) in enumerate(zip(edge_scores, edge_scores_norm))
+                    ]
                     null_score = edge_scores[0][0]
                     edge_scores.sort(key=lambda x: x[0], reverse=True)
-                    top_edge_scores = edge_scores[:self.beta_e]
+                    top_edge_scores = edge_scores[: self.beta_e]
 
                     beam_set_ = []
                     for graph in beam_set:
@@ -1082,8 +1227,10 @@ class OneIE(nn.Module):
                         for score, label, score_norm in top_edge_scores:
                             role_entity = label * 100 + graph.entities[-1][-1]
                             event_role = graph.triggers[i][-1] * 100 + label
-                            if label == 0 or (event_role in self.valid_event_role and
-                                              role_entity in self.valid_role_entity):
+                            if label == 0 or (
+                                event_role in self.valid_event_role
+                                and role_entity in self.valid_role_entity
+                            ):
                                 graph_ = graph.copy()
                                 graph_.add_role(i, entity_idx, label, score, score_norm)
                                 beam_set_.append(graph_)
@@ -1100,15 +1247,19 @@ class OneIE(nn.Module):
             else:
                 # add a new trigger: new argument roles
                 for i in range(entity_idx):
-                    edge_scores = role_type_scores[trigger_idx * entity_num + i].tolist()
+                    edge_scores = role_type_scores[
+                        trigger_idx * entity_num + i
+                    ].tolist()
                     edge_scores_norm = normalize_score(edge_scores)
                     # edge_scores_norm = (edge_scores / 10.0).softmax(0).tolist()
                     # edge_scores = edge_scores.tolist()
-                    edge_scores = [(s, i, n) for i, (s, n) in enumerate(zip(edge_scores,
-                                                                            edge_scores_norm))]
+                    edge_scores = [
+                        (s, i, n)
+                        for i, (s, n) in enumerate(zip(edge_scores, edge_scores_norm))
+                    ]
                     null_score = edge_scores[0][0]
                     edge_scores.sort(key=lambda x: x[0], reverse=True)
-                    top_edge_scores = edge_scores[:self.beta_e]
+                    top_edge_scores = edge_scores[: self.beta_e]
 
                     beam_set_ = []
                     for graph in beam_set:
@@ -1116,10 +1267,14 @@ class OneIE(nn.Module):
                         for score, label, score_norm in top_edge_scores:
                             event_role = graph.triggers[-1][-1] * 100 + label
                             role_entity = label * 100 + graph.entities[i][-1]
-                            if label == 0 or (event_role in self.valid_event_role
-                                              and role_entity in self.valid_role_entity):
+                            if label == 0 or (
+                                event_role in self.valid_event_role
+                                and role_entity in self.valid_role_entity
+                            ):
                                 graph_ = graph.copy()
-                                graph_.add_role(trigger_idx, i, label, score, score_norm)
+                                graph_.add_role(
+                                    trigger_idx, i, label, score, score_norm
+                                )
                                 beam_set_.append(graph_)
                                 has_valid_edge = True
                         if not has_valid_edge:
@@ -1142,8 +1297,9 @@ class OneIE(nn.Module):
         # predict mention types
         _, mention_types = mention_type_scores.max(dim=1)
         mention_types = mention_types[:entity_idx]
-        mention_list = [(i, j, l.item()) for (i, j, k), l
-                        in zip(graph.entities, mention_types)]
+        mention_list = [
+            (i, j, l.item()) for (i, j, k), l in zip(graph.entities, mention_types)
+        ]
         graph.mentions = mention_list
 
         return graph

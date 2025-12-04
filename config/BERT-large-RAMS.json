@@ -6,16 +6,8 @@
     "use_extra_bert": false,
     "extra_bert": -3,
 
-    "use_global_features": true,
+    "use_global_features": false,
     "global_features": [
-        "role_role",
-        "event_role_num",
-        "role_entity",
-        "multi_role",
-        "relation_entity",
-        "relation_role_role",
-        "relation_relation",
-        "multi_event"
     ],
     "global_warmup": 0,
 
@@ -27,12 +19,12 @@
     "relation_hidden_num": 150,
     "role_hidden_num": 600,
     "use_entity_type": true,
-    "beam_size": 15,
+    "beam_size": 10,
     "beta_v": 2,
     "beta_e": 2,
     "relation_mask_self": true,
     "relation_directional": true,
-    "symmetric_relations": ["PER-SOC"],
+    "symmetric_relations": "",
 
     "train_file": "data/oneie/rams/train.oneie.json",
     "dev_file": "data/oneie/rams/dev.oneie.json",
