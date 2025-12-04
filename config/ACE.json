@@ -1,14 +1,15 @@
 {
+    "coref": true,
     "bert_model_name": "roberta-large",
     "bert_cache_dir": null,
     "multi_piece_strategy": "average",
     "bert_dropout": 0.5,
-    "use_extra_bert": false,
+    "use_extra_bert": true,
     "extra_bert": -3,
-
+    
     "use_global_features": true,
-    "global_features": [],
     "global_warmup": 5,
+    "global_features": [],
 
     "linear_dropout": 0.4,
     "linear_bias": true,
@@ -26,26 +27,26 @@
     "relation_directional": false,
     "symmetric_relations": [],
 
-    "train_file": "data/oneie/rams/train.oneie.json",
-    "dev_file": "data/oneie/rams/dev.oneie.json",
-    "test_file": "data/oneie/rams/test.oneie.json",
-    "valid_pattern_path": "resource/valid_patterns_rams",
-    "log_path": "logs/rams_bert_large",
-    "ignore_title": false,
+    "train_file": "input/collated-roberta-ace-time/train.oneie.json",
+    "dev_file": "input/collated-roberta-ace-time/dev.oneie.json",
+    "test_file": "input/collated-roberta-ace-time/test.oneie.json",
+    "valid_pattern_path": "./resource/valid_patterns_collated_time",
+    "log_path": "../artifacts",
+    "ignore_title": false, 
     "ignore_first_header": false,
-
+    
     "accumulate_step": 1,
-    "batch_size": 4,
-    "eval_batch_size": 8,
+    "batch_size": 10,
+    "eval_batch_size": 10,
     "max_epoch": 60,
-    "learning_rate": 1e-3,
+    "learning_rate": 0.001,
     "bert_learning_rate": 1e-5,
-    "weight_decay": 1e-3,
+    "weight_decay": 0.001,
     "bert_weight_decay": 1e-5,
     "warmup_epoch": 5,
     "grad_clipping": 5.0,
-
+    
+    "sent_max_length": 256,
     "use_gpu": true,
-    "gpu_device": 0,
-    "sent_max_length": 128
+    "gpu_device": 0
 }

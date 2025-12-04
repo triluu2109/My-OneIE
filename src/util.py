@@ -6,9 +6,9 @@ from nltk import word_tokenize, sent_tokenize
 from copy import deepcopy
 
 
-def generate_vocabs(datasets, coref=False,
-                    relation_directional=False,
-                    symmetric_relations=None):
+def generate_vocabs(
+    datasets, coref=False, relation_directional=False, symmetric_relations=None
+):
     """Generate vocabularies from a list of data sets
     :param datasets (list): A list of data sets
     :return (dict): A dictionary of vocabs
@@ -59,7 +59,7 @@ def generate_vocabs(datasets, coref=False,
     role_type_stoi['O'] = 0
 
     # mention_type_stoi = {'NAM': 0, 'NOM': 1, 'PRO': 2, 'UNK': 3}
-    mention_type_stoi = {'NAM': 0, 'NOM': 1, 'PRO': 2, 'UNK': 3, 'TIME':4, 'VALUE':5}
+    mention_type_stoi = {'NAM': 0, 'NOM': 1, 'PRO': 2, 'UNK': 3, 'TIME': 4, 'VALUE': 5}
 
     return {
         'entity_type': entity_type_stoi,
@@ -81,7 +81,8 @@ def load_valid_patterns(path, vocabs):
     # valid event-role
     valid_event_role = set()
     event_role = json.load(
-        open(os.path.join(path, 'event_role.json'), 'r', encoding='utf-8'))
+        open(os.path.join(path, 'event_role.json'), 'r', encoding='utf-8')
+    )
     for event, roles in event_role.items():
         if event not in event_type_vocab:
             continue
@@ -95,18 +96,19 @@ def load_valid_patterns(path, vocabs):
     # valid relation-entity
     valid_relation_entity = set()
     relation_entity = json.load(
-        open(os.path.join(path, 'relation_entity.json'), 'r', encoding='utf-8'))
+        open(os.path.join(path, 'relation_entity.json'), 'r', encoding='utf-8')
+    )
     for relation, entities in relation_entity.items():
         relation_type_idx = relation_type_vocab[relation]
         for entity in entities:
             entity_type_idx = entity_type_vocab[entity]
-            valid_relation_entity.add(
-                relation_type_idx * 100 + entity_type_idx)
+            valid_relation_entity.add(relation_type_idx * 100 + entity_type_idx)
 
     # valid role-entity
     valid_role_entity = set()
     role_entity = json.load(
-        open(os.path.join(path, 'role_entity.json'), 'r', encoding='utf-8'))
+        open(os.path.join(path, 'role_entity.json'), 'r', encoding='utf-8')
+    )
     for role, entities in role_entity.items():
         if role not in role_type_vocab:
             continue
@@ -118,13 +120,14 @@ def load_valid_patterns(path, vocabs):
     return {
         'event_role': valid_event_role,
         'relation_entity': valid_relation_entity,
-        'role_entity': valid_role_entity
+        'role_entity': valid_role_entity,
     }
 
 
 def read_ltf(path):
-    root = et.parse(path, et.XMLParser(
-        dtd_validation=False, encoding='utf-8')).getroot()
+    root = et.parse(
+        path, et.XMLParser(dtd_validation=False, encoding='utf-8')
+    ).getroot()
     doc_id = root.find('DOC').get('id')
     doc_tokens = []
     for seg in root.find('DOC').find('TEXT').findall('SEG'):
@@ -136,9 +139,10 @@ def read_ltf(path):
             token_text = token.text
             start_char = int(token.get('start_char'))
             end_char = int(token.get('end_char'))
-            assert seg_text[start_char - seg_start:
-                            end_char - seg_start + 1
-                            ] == token_text, 'token offset error'
+            assert (
+                seg_text[start_char - seg_start : end_char - seg_start + 1]
+                == token_text
+            ), 'token offset error'
             seg_tokens.append((token_text, start_char, end_char))
         doc_tokens.append((seg_id, seg_tokens))
 
@@ -149,15 +153,17 @@ def read_txt(path, language='english'):
     doc_id = os.path.basename(path)
     data = open(path, 'r', encoding='utf-8').read()
     data = [s.strip() for s in data.split('\n') if s.strip()]
-    sents = [l for ls in [sent_tokenize(line, language=language) for line in data]
-             for l in ls]
+    sents = [
+        l
+        for ls in [sent_tokenize(line, language=language) for line in data]
+        for l in ls
+    ]
     doc_tokens = []
     offset = 0
     for sent_idx, sent in enumerate(sents):
         sent_id = '{}-{}'.format(doc_id, sent_idx)
         tokens = word_tokenize(sent)
-        tokens = [(token, offset + i, offset + i + 1)
-                  for i, token in enumerate(tokens)]
+        tokens = [(token, offset + i, offset + i + 1) for i, token in enumerate(tokens)]
         offset += len(tokens)
         doc_tokens.append((sent_id, tokens))
     return doc_tokens, doc_id
@@ -172,8 +178,7 @@ def read_json(path):
 
     for inst in data:
         tokens = inst['tokens']
-        tokens = [(token, offset + i, offset + i + 1)
-                  for i, token in enumerate(tokens)]
+        tokens = [(token, offset + i, offset + i + 1) for i, token in enumerate(tokens)]
         offset += len(tokens)
         doc_tokens.append((inst['sent_id'], tokens))
     return doc_tokens, doc_id
@@ -194,21 +199,28 @@ def read_json_single(path):
 def save_result(output_file, gold_graphs, pred_graphs, sent_ids, tokens=None):
     with open(output_file, 'w', encoding='utf-8') as w:
         for i, (gold_graph, pred_graph, sent_id) in enumerate(
-                zip(gold_graphs, pred_graphs, sent_ids)):
-            output = {'sent_id': sent_id,
-                      'gold': gold_graph.to_dict(),
-                      'pred': pred_graph.to_dict()}
+            zip(gold_graphs, pred_graphs, sent_ids)
+        ):
+            output = {
+                'sent_id': sent_id,
+                'gold': gold_graph.to_dict(),
+                'pred': pred_graph.to_dict(),
+            }
             if tokens:
                 output['tokens'] = tokens[i]
             w.write(json.dumps(output) + '\n')
 
 
-def mention_to_tab(start, end, entity_type, mention_type, mention_id, tokens, token_ids, score=1):
+def mention_to_tab(
+    start, end, entity_type, mention_type, mention_id, tokens, token_ids, score=1
+):
     tokens = tokens[start:end]
     token_ids = token_ids[start:end]
-    span = '{}:{}-{}'.format(token_ids[0].split(':')[0],
-                             token_ids[0].split(':')[1].split('-')[0],
-                             token_ids[1].split(':')[1].split('-')[1])
+    span = '{}:{}-{}'.format(
+        token_ids[0].split(':')[0],
+        token_ids[0].split(':')[1].split('-')[0],
+        token_ids[1].split(':')[1].split('-')[1],
+    )
     mention_text = tokens[0]
     previous_end = int(token_ids[0].split(':')[1].split('-')[1])
     for token, token_id in zip(tokens[1:], token_ids[1:]):
@@ -216,30 +228,30 @@ def mention_to_tab(start, end, entity_type, mention_type, mention_id, tokens, to
         start, end = int(start), int(end)
         mention_text += ' ' * (start - previous_end) + token
         previous_end = end
-    return '\t'.join([
-        'json2tab',
-        mention_id,
-        mention_text,
-        span,
-        'NIL',
-        entity_type,
-        mention_type,
-        str(score)
-    ])
+    return '\t'.join(
+        [
+            'json2tab',
+            mention_id,
+            mention_text,
+            span,
+            'NIL',
+            entity_type,
+            mention_type,
+            str(score),
+        ]
+    )
 
 
-def json_to_mention_results(input_dir, output_dir, file_name,
-                            bio_separator=' '):
+def json_to_mention_results(input_dir, output_dir, file_name, bio_separator=' '):
     mention_type_list = ['nam', 'nom', 'pro', 'nam+nom+pro']
     file_type_list = ['bio', 'tab']
     writers = {}
     for mention_type in mention_type_list:
         for file_type in file_type_list:
-            output_file = os.path.join(output_dir, '{}.{}.{}'.format(file_name,
-                                                                     mention_type,
-                                                                     file_type))
-            writers['{}_{}'.format(mention_type, file_type)
-                    ] = open(output_file, 'w')
+            output_file = os.path.join(
+                output_dir, '{}.{}.{}'.format(file_name, mention_type, file_type)
+            )
+            writers['{}_{}'.format(mention_type, file_type)] = open(output_file, 'w')
 
     json_files = glob.glob(os.path.join(input_dir, '*.json'))
     for f in json_files:
@@ -249,8 +261,7 @@ def json_to_mention_results(input_dir, output_dir, file_name,
                 doc_id = result['doc_id']
                 tokens = result['tokens']
                 token_ids = result['token_ids']
-                bio_tokens = [[t, tid, 'O']
-                              for t, tid in zip(tokens, token_ids)]
+                bio_tokens = [[t, tid, 'O'] for t, tid in zip(tokens, token_ids)]
                 # separate bio output
                 for mention_type in ['NAM', 'NOM', 'PRO']:
                     tokens_tmp = deepcopy(bio_tokens)
@@ -258,8 +269,7 @@ def json_to_mention_results(input_dir, output_dir, file_name,
                         if mention_type == mentype:
                             tokens_tmp[start] = 'B-{}'.format(enttype)
                             for token_idx in range(start + 1, end):
-                                tokens_tmp[token_idx] = 'I-{}'.format(
-                                    enttype)
+                                tokens_tmp[token_idx] = 'I-{}'.format(enttype)
                     writer = writers['{}_bio'.format(mention_type.lower())]
                     for token in tokens_tmp:
                         writer.write(bio_separator.join(token) + '\n')
@@ -282,7 +292,14 @@ def json_to_mention_results(input_dir, output_dir, file_name,
                         if mention_type == mentype:
                             mention_id = '{}-{}'.format(doc_id, mention_count)
                             tab_line = mention_to_tab(
-                                start, end, enttype, mentype, mention_id, tokens, token_ids)
+                                start,
+                                end,
+                                enttype,
+                                mentype,
+                                mention_id,
+                                tokens,
+                                token_ids,
+                            )
                             writer.write(tab_line + '\n')
                 # combined tab output
                 writer = writers['nam+nom+pro_tab']
@@ -290,7 +307,8 @@ def json_to_mention_results(input_dir, output_dir, file_name,
                 for start, end, enttype, mentype in result['graph']['entities']:
                     mention_id = '{}-{}'.format(doc_id, mention_count)
                     tab_line = mention_to_tab(
-                        start, end, enttype, mentype, mention_id, tokens, token_ids)
+                        start, end, enttype, mentype, mention_id, tokens, token_ids
+                    )
                     writer.write(tab_line + '\n')
     for w in writers:
         w.close()
@@ -321,11 +339,18 @@ def best_score_by_task(log_file, task, max_epoch=1000):
                 best_scores = [dev, test, epoch]
 
         print('Epoch: {}'.format(best_scores[-1]))
-        tasks = ['entity', 'mention', 'relation', 'trigger_id', 'trigger',
-                 'role_id', 'role']
+        tasks = [
+            'entity',
+            'mention',
+            'relation',
+            'trigger_id',
+            'trigger',
+            'role_id',
+            'role',
+        ]
         for t in tasks:
-            print('{}: dev: {:.2f}, test: {:.2f}'.format(t,
-                                                         best_scores[0][t][
-                                                             'f'] * 100.0,
-                                                         best_scores[1][t][
-                                                             'f'] * 100.0))
+            print(
+                '{}: dev: {:.2f}, test: {:.2f}'.format(
+                    t, best_scores[0][t]['f'] * 100.0, best_scores[1][t]['f'] * 100.0
+                )
+            )
